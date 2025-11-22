@@ -41,7 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme }) => {
         <NavLink to="/explore" className={({ isActive }) => isActive ? "active-link" : ""}>
           Explore
         </NavLink>
-        <a href="https://app.lucid0ai.co" className="nav-link external">Log in</a>
+        <a href="https://app.lucid-ai.co" className="nav-link external">Log in</a>
         <a href="https://tranquil-artist-65.authkit.app/sign-up" className="btn-primary compact">Get Started</a>
         <button className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle theme">
           {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
