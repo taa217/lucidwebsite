@@ -31,7 +31,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme }) => {
           Explore
         </NavLink>
         <a href="https://lucidai-m3m2.vercel.app/auth/workos/authorize" className="nav-link external">Log in</a>
-        <a href="https://mystical-nirvana-55-staging.authkit.app/sign-up" className="btn-primary">Get Started</a>
+        <a href="https://tranquil-artist-65.authkit.app/sign-up" className="btn-primary">Get Started</a>
         <button className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle theme">
           {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
         </button>

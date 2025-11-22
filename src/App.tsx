@@ -65,7 +65,7 @@ function App() {
               <h4>Product</h4>
               <a href="/">Home</a>
               <a href="/explore">Explore</a>
-              <a href="https://mystical-nirvana-55-staging.authkit.app/sign-up">Get Started</a>
+              <a href="https://tranquil-artist-65.authkit.app/sign-up">Get Started</a>
               <a href="mailto:clydetadiwa8@gmail;com">Contact</a>
             </div>
           </div>
