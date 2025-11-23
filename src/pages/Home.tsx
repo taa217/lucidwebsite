@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Zap, ArrowRight, Sparkles, Brain, MessageSquare, Layers, Target, Radio } from 'lucide-react';
+import { Zap, ArrowRight, Sparkles, Brain, MessageSquare, Layers, Target, Radio, Play } from 'lucide-react';
 import { BiogasAnimation } from '../components/BiogasAnimation';
 import { BiogasExplainer } from '../components/BiogasExplainer';
 
@@ -173,6 +173,15 @@ export const Home = () => {
                   isActive={isDemoPlaying} 
                   onComplete={() => setIsDemoPlaying(false)} 
                 />
+              )}
+              {!isDemoPlaying && (
+                <button 
+                  className="demo-play-button" 
+                  onClick={handleGenerate}
+                  aria-label="Play demo"
+                >
+                  <Play size={48} fill="currentColor" />
+                </button>
               )}
               <div className="ui-mock" style={{ opacity: isDemoPlaying ? 0 : 1, transition: 'opacity 0.5s' }}>
                 <div className="ui-sidebar">
