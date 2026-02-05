@@ -68,7 +68,6 @@ export const Home = () => {
 
   // Old simpler animation effects - disabled when isDemoPlaying is used for the new Explainer
   useEffect(() => {
-    if (!isDemoPlaying) return;
     // The new BiogasExplainer handles its own timing
   }, [isDemoPlaying]);
 

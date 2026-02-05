@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useTTS, useBrowserTTS } from '../hooks/useTTS';
 
 interface GenericExplainerProps {
   isActive: boolean;
@@ -7,23 +8,27 @@ interface GenericExplainerProps {
 }
 
 export const GenericExplainer: React.FC<GenericExplainerProps> = ({ isActive, title }) => {
-  const [step, setStep] = useState(0);
+  // const [step, setStep] = useState(0);
+  const narration = `Welcome to the lesson on ${title}. This is a generated interactive module. Lucid analyzes the topic structure and builds a custom visual guide just for you.`;
+
+  const { hasError: cartesiaError } = useTTS({
+    text: narration,
+    isPlaying: isActive,
+    // onComplete: () => setStep(1),
+    voiceId: "694f9389-aac1-45b6-b726-9d9369183238"
+  });
+
+  useBrowserTTS({
+    text: cartesiaError ? narration : "",
+    isPlaying: isActive && cartesiaError,
+    // onComplete: () => setStep(1)
+  });
   
-  useEffect(() => {
-    if (!isActive) {
-      setStep(0);
-      window.speechSynthesis.cancel();
-      return;
-    }
-    
-    const text = `Welcome to the lesson on ${title}. This is a generated interactive module. Lucid analyzes the topic structure and builds a custom visual guide just for you.`;
-    
-    const u = new SpeechSynthesisUtterance(text);
-    window.speechSynthesis.speak(u);
-    
-    const t = setTimeout(() => setStep(1), 1000);
-    return () => { clearTimeout(t); window.speechSynthesis.cancel(); };
-  }, [isActive, title]);
+  // useEffect(() => {
+  //   if (!isActive) {
+  //     setStep(0);
+  //   }
+  // }, [isActive]);
 
   return (
     <div style={{ width: '100%', height: '100%', background: '#0c0f14', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>

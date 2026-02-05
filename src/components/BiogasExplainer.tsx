@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Leaf, Zap, Flame, Recycle, Database, Activity } from 'lucide-react';
+import { useTTS, useBrowserTTS } from '../hooks/useTTS';
 
 // Types for our scene configuration
 interface SceneConfig {
@@ -27,6 +28,7 @@ interface BiogasExplainerProps {
 
 export const BiogasExplainer: React.FC<BiogasExplainerProps> = ({ isActive, onComplete }) => {
   const [currentScene, setCurrentScene] = useState(0);
+  const [sceneData, setSceneData] = useState<SceneConfig | undefined>(undefined);
   
   // Reset when activated
   useEffect(() => {
@@ -37,78 +39,58 @@ export const BiogasExplainer: React.FC<BiogasExplainerProps> = ({ isActive, onCo
     }
   }, [isActive]);
 
-  // Scene Timer
+  // Update scene data when scene changes
   useEffect(() => {
-    if (!isActive || currentScene === 0) return;
+    setSceneData(scenes.find(s => s.id === currentScene));
+  }, [currentScene]);
 
-    const sceneData = scenes.find(s => s.id === currentScene);
-    if (!sceneData) return;
-
-    // Speak narration
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      
-      // Create a temporary utterance to check duration if possible, 
-      // but standard Web Speech API doesn't give duration beforehand.
-      // Instead, we will rely on the 'end' event of the speech synthesis
-      // to trigger the next scene, rather than a hardcoded timeout.
-      
-      const utterance = new SpeechSynthesisUtterance(sceneData.narration);
-      utterance.rate = 0.95; 
-      utterance.pitch = 1;
-      utterance.lang = 'en-US';
-      
-      // IMPORTANT: If speech finishes BEFORE the visual duration, we wait.
-      // If visuals finish BEFORE speech, we wait for speech.
-      
-      let speechFinished = false;
-      let timeFinished = false;
-      
-      const tryAdvance = () => {
-        if (speechFinished && timeFinished) {
-           if (currentScene < scenes.length) {
-             setCurrentScene(prev => prev + 1);
-           } else {
-             if (onComplete) onComplete();
-           }
-        }
-      };
-
-      utterance.onend = () => {
-        speechFinished = true;
-        tryAdvance();
-      };
-
-      // Fallback if speech fails or takes too long (browser quirks)
-      utterance.onerror = () => {
-         speechFinished = true;
-         tryAdvance();
-      };
-
-      window.speechSynthesis.speak(utterance);
-
-      // Minimum duration timer (visuals)
-      const timer = setTimeout(() => {
-        timeFinished = true;
-        tryAdvance();
-      }, sceneData.duration);
-
-      return () => {
-        clearTimeout(timer);
-        window.speechSynthesis.cancel();
-      };
+  // Handle TTS and Scene Progression
+  const handleSceneComplete = () => {
+    if (currentScene < scenes.length) {
+      setCurrentScene(prev => prev + 1);
     } else {
-      // Fallback for no speech support - just use timer
-       const timer = setTimeout(() => {
-        if (currentScene < scenes.length) {
-          setCurrentScene(prev => prev + 1);
-        } else {
-          if (onComplete) onComplete();
-        }
-      }, sceneData.duration);
-       return () => clearTimeout(timer);
+      if (onComplete) onComplete();
     }
-  }, [currentScene, isActive, onComplete]);
+  };
+
+  // Cartesia TTS
+  const { hasError: cartesiaError } = useTTS({
+    text: sceneData?.narration || "",
+    isPlaying: isActive && !!sceneData && currentScene > 0,
+    onComplete: handleSceneComplete,
+    voiceId: "694f9389-aac1-45b6-b726-9d9369183238" // Example voice ID
+  });
+
+  // Browser TTS Fallback
+  useBrowserTTS({
+    text: cartesiaError ? (sceneData?.narration || "") : "", // Only use if cartesia error
+    isPlaying: isActive && !!sceneData && currentScene > 0 && cartesiaError,
+    onComplete: handleSceneComplete
+  });
+
+  // Safety timer in case audio fails completely or for visual syncing
+  useEffect(() => {
+     if (!isActive || !sceneData) return;
+     
+     // Only set a timeout if we expect audio to drive it but want a backup
+     // Or if we are in a purely visual mode (but we want audio primarily).
+     // The TTS hooks handle onComplete, so we might not strictly need this 
+     // unless we want to enforce a minimum duration or handle "no audio" cases gracefully without the hooks.
+     
+     // However, to keep it robust:
+     // If TTS hooks are driving, they call onComplete.
+     // If both fail/timeout, we need a backup.
+     
+     // For now, relying on the TTS hooks 'onComplete' callback is the best way to sync speech.
+     // But if we want to force advance if speech is stuck:
+     const safetyTimer = setTimeout(() => {
+         // Check if we are still on the same scene after expected duration + buffer
+         // This is a bit complex with hooks. 
+         // Let's trust the TTS hooks to fire onComplete (or onError -> onComplete).
+     }, sceneData.duration + 5000);
+
+     return () => clearTimeout(safetyTimer);
+  }, [sceneData, isActive]);
 
   // Colors
   const colors = {

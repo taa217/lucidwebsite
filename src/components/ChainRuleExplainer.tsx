@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTTS, useBrowserTTS } from '../hooks/useTTS';
 
 interface ChainRuleExplainerProps {
   isActive: boolean;
@@ -7,7 +8,13 @@ interface ChainRuleExplainerProps {
 }
 
 // Scene Configuration
-const scenes = [
+interface SceneConfig {
+    id: number;
+    duration: number;
+    narration: string;
+}
+
+const scenes: SceneConfig[] = [
   { id: 1, duration: 3000, narration: "Let’s build an intuition for the chain rule — the idea behind differentiating functions inside functions." },
   { id: 2, duration: 6000, narration: "When we have a function inside another function, we call it a composite. Think of it as a process: x goes into g, and the result goes into f." },
   { id: 3, duration: 10000, narration: "When x changes a little, g of x changes a little. That change then flows into f. The chain rule measures how fast f changes, by watching how g changes beneath it." },
@@ -20,6 +27,7 @@ const scenes = [
 
 export const ChainRuleExplainer: React.FC<ChainRuleExplainerProps> = ({ isActive, onComplete }) => {
   const [currentScene, setCurrentScene] = useState(0);
+  const [sceneData, setSceneData] = useState<SceneConfig | undefined>(undefined);
 
   // Scene State Management
   useEffect(() => {
@@ -31,53 +39,29 @@ export const ChainRuleExplainer: React.FC<ChainRuleExplainerProps> = ({ isActive
   }, [isActive]);
 
   useEffect(() => {
-    if (!isActive || currentScene === 0) return;
-    
-    const sceneData = scenes.find(s => s.id === currentScene);
-    if (!sceneData) return;
+    setSceneData(scenes.find(s => s.id === currentScene));
+  }, [currentScene]);
 
-    let speechFinished = false;
-    let timeFinished = false;
-
-    const advance = () => {
-      if (speechFinished && timeFinished) {
-        if (currentScene < scenes.length) {
-          setCurrentScene(prev => prev + 1);
-        } else if (onComplete) {
-          onComplete();
-        }
-      }
-    };
-
-    // Narration
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(sceneData.narration);
-      u.rate = 0.95;
-      u.onend = () => {
-        speechFinished = true;
-        advance();
-      };
-      u.onerror = () => { // Fallback
-         speechFinished = true;
-         advance();
-      };
-      window.speechSynthesis.speak(u);
-    } else {
-      speechFinished = true; // No speech support
+  const handleSceneComplete = () => {
+    if (currentScene < scenes.length) {
+      setCurrentScene(prev => prev + 1);
+    } else if (onComplete) {
+      onComplete();
     }
+  };
 
-    // Min Duration Timer
-    const timer = setTimeout(() => {
-      timeFinished = true;
-      advance();
-    }, sceneData.duration);
+  const { hasError: cartesiaError } = useTTS({
+    text: sceneData?.narration || "",
+    isPlaying: isActive && !!sceneData && currentScene > 0,
+    onComplete: handleSceneComplete,
+    voiceId: "694f9389-aac1-45b6-b726-9d9369183238"
+  });
 
-    return () => {
-      clearTimeout(timer);
-      window.speechSynthesis.cancel();
-    };
-  }, [currentScene, isActive, onComplete]);
+  useBrowserTTS({
+    text: cartesiaError ? (sceneData?.narration || "") : "",
+    isPlaying: isActive && !!sceneData && currentScene > 0 && cartesiaError,
+    onComplete: handleSceneComplete
+  });
 
   // Colors & Styles
   const c = {

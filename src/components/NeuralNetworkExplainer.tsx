@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, FileText, Music, Table } from 'lucide-react';
+import { Brain, Music, Table } from 'lucide-react';
+import { useTTS, useBrowserTTS } from '../hooks/useTTS';
 
 interface NeuralNetworkExplainerProps {
   isActive: boolean;
@@ -8,7 +9,13 @@ interface NeuralNetworkExplainerProps {
 }
 
 // Scene Configuration
-const scenes = [
+interface SceneConfig {
+    id: number;
+    duration: number;
+    narration: string;
+}
+
+const scenes: SceneConfig[] = [
   { id: 1, duration: 3000, narration: "A neural network is a system that learns to transform inputs into meaningful outputs." },
   { id: 2, duration: 8000, narration: "Each unit, or neuron, takes numbers in, mixes them together, applies a rule, and sends out a new number." },
   { id: 3, duration: 8000, narration: "Stack these neurons into layers, and each layer extracts more abstract patterns than the last." },
@@ -22,6 +29,7 @@ const scenes = [
 
 export const NeuralNetworkExplainer: React.FC<NeuralNetworkExplainerProps> = ({ isActive, onComplete }) => {
   const [currentScene, setCurrentScene] = useState(0);
+  const [sceneData, setSceneData] = useState<SceneConfig | undefined>(undefined);
 
   // Scene State Management
   useEffect(() => {
@@ -33,53 +41,29 @@ export const NeuralNetworkExplainer: React.FC<NeuralNetworkExplainerProps> = ({ 
   }, [isActive]);
 
   useEffect(() => {
-    if (!isActive || currentScene === 0) return;
-    
-    const sceneData = scenes.find(s => s.id === currentScene);
-    if (!sceneData) return;
+    setSceneData(scenes.find(s => s.id === currentScene));
+  }, [currentScene]);
 
-    let speechFinished = false;
-    let timeFinished = false;
-
-    const advance = () => {
-      if (speechFinished && timeFinished) {
-        if (currentScene < scenes.length) {
-          setCurrentScene(prev => prev + 1);
-        } else if (onComplete) {
-          onComplete();
-        }
-      }
-    };
-
-    // Narration
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(sceneData.narration);
-      u.rate = 0.95;
-      u.onend = () => {
-        speechFinished = true;
-        advance();
-      };
-      u.onerror = () => {
-         speechFinished = true;
-         advance();
-      };
-      window.speechSynthesis.speak(u);
-    } else {
-      speechFinished = true; // No speech support
+  const handleSceneComplete = () => {
+    if (currentScene < scenes.length) {
+      setCurrentScene(prev => prev + 1);
+    } else if (onComplete) {
+      onComplete();
     }
+  };
 
-    // Min Duration Timer
-    const timer = setTimeout(() => {
-      timeFinished = true;
-      advance();
-    }, sceneData.duration);
+  const { hasError: cartesiaError } = useTTS({
+    text: sceneData?.narration || "",
+    isPlaying: isActive && !!sceneData && currentScene > 0,
+    onComplete: handleSceneComplete,
+    voiceId: "694f9389-aac1-45b6-b726-9d9369183238"
+  });
 
-    return () => {
-      clearTimeout(timer);
-      window.speechSynthesis.cancel();
-    };
-  }, [currentScene, isActive, onComplete]);
+  useBrowserTTS({
+    text: cartesiaError ? (sceneData?.narration || "") : "",
+    isPlaying: isActive && !!sceneData && currentScene > 0 && cartesiaError,
+    onComplete: handleSceneComplete
+  });
 
   // Colors & Styles
   const c = {

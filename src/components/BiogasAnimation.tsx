@@ -10,14 +10,14 @@ export const BiogasAnimation: React.FC<BiogasAnimationProps> = ({ step, isPlayin
   // Colors
   const c_slurry = "#8B5CF6"; // Purple for organic matter
   const c_methane = "#00F6BB"; // Teal/Green for Biogas
-  const c_co2 = "#94A3B8"; // Grey for CO2/Waste
+  // const c_co2 = "#94A3B8"; // Grey for CO2/Waste
   const c_pipe = "rgba(255, 255, 255, 0.2)";
 
   // Variants for orchestration
-  const tankVariants = {
-    initial: { scale: 0.9, opacity: 0.5 },
-    active: { scale: 1, opacity: 1, transition: { duration: 0.8 } }
-  };
+  // const tankVariants = {
+  //   initial: { scale: 0.9, opacity: 0.5 },
+  //   active: { scale: 1, opacity: 1, transition: { duration: 0.8 } }
+  // };
 
   return (
     <div className="biogas-animation-container" style={{ width: '100%', height: '100%', position: 'relative', overflow: 'hidden', background: '#0B162F', borderRadius: '16px' }}>
