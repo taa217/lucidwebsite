@@ -67,7 +67,7 @@ function App() {
               <a href="mailto:clydetadiwa8@gmail;com">Contact</a>
             </div>
           </div>
-          <p className="footer-bottom">© 2025 Lucid AI. Designed for learners everywhere.</p>
+          <p className="footer-bottom">© {new Date().getFullYear()} Lucid AI. Designed for learners everywhere.</p>
         </footer>
       </div>
     </Router>
