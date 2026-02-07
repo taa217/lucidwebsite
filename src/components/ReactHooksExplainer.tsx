@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Box, RefreshCw, Database, ArrowRight } from 'lucide-react';
-import { useTTS, useBrowserTTS } from '../hooks/useTTS';
+import { useTTSWithPrefetch, useBrowserTTSFallback } from '../hooks/useTTSWithPrefetch';
 
 interface ReactHooksExplainerProps {
   isActive: boolean;
@@ -52,14 +52,17 @@ export const ReactHooksExplainer: React.FC<ReactHooksExplainerProps> = ({ isActi
     }
   };
 
-  const { hasError: cartesiaError } = useTTS({
-    text: sceneData?.narration || "",
-    isPlaying: isActive && !!sceneData && currentScene > 0,
+  // Cartesia TTS with Prefetching - loads next scenes while current plays
+  const { hasError: cartesiaError } = useTTSWithPrefetch({
+    scenes: scenes,
+    currentSceneId: currentScene,
+    isPlaying: isActive && currentScene > 0,
     onComplete: handleSceneComplete,
-    voiceId: "694f9389-aac1-45b6-b726-9d9369183238"
+    voiceId: "694f9389-aac1-45b6-b726-9d9369183238",
+    prefetchCount: 2
   });
 
-  useBrowserTTS({
+  useBrowserTTSFallback({
     text: cartesiaError ? (sceneData?.narration || "") : "",
     isPlaying: isActive && !!sceneData && currentScene > 0 && cartesiaError,
     onComplete: handleSceneComplete

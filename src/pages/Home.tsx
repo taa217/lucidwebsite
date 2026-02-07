@@ -1,9 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Zap, ArrowRight, Sparkles, Brain, MessageSquare, Layers, Target, Radio, Play } from 'lucide-react';
 import { BiogasAnimation } from '../components/BiogasAnimation';
 import { BiogasExplainer } from '../components/BiogasExplainer';
+import { preloadScenes } from '../hooks/useTTSWithPrefetch';
+
+// Biogas first scene for preloading on hover
+const biogasScenesForPreload = [
+  { id: 1, narration: "Let's take a quick look at how biogas is created using nothing more than organic waste and a bit of biology." },
+];
 
 const demoTimeline = [
   {
@@ -70,6 +76,16 @@ export const Home = () => {
   useEffect(() => {
     // The new BiogasExplainer handles its own timing
   }, [isDemoPlaying]);
+
+  // Preload first scenes when user hovers over generate button
+  const hasPreloadedRef = useRef(false);
+  const handlePreloadOnHover = useCallback(() => {
+    if (!hasPreloadedRef.current) {
+      hasPreloadedRef.current = true;
+      // Preload first scene so playback starts instantly
+      preloadScenes(biogasScenesForPreload, "694f9389-aac1-45b6-b726-9d9369183238", 1);
+    }
+  }, []);
 
   const handleGenerate = () => {
     setIsDemoPlaying(true);
@@ -141,7 +157,12 @@ export const Home = () => {
             <span className="input-label">I want to learn...</span>
             <span className="typed-content">{typedText}<span className="cursor">|</span></span>
           </div>
-          <button className="generate-btn" onClick={handleGenerate}>
+          <button 
+            className="generate-btn" 
+            onClick={handleGenerate}
+            onMouseEnter={handlePreloadOnHover}
+            onFocus={handlePreloadOnHover}
+          >
             <Zap size={18} fill="currentColor" /> Generate
           </button>
         </motion.div>
@@ -177,6 +198,8 @@ export const Home = () => {
                 <button 
                   className="demo-play-button" 
                   onClick={handleGenerate}
+                  onMouseEnter={handlePreloadOnHover}
+                  onFocus={handlePreloadOnHover}
                   aria-label="Play demo"
                 >
                   <Play size={48} fill="currentColor" />

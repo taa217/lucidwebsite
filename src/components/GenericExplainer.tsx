@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTTS, useBrowserTTS } from '../hooks/useTTS';
+// Note: GenericExplainer uses the simple TTS hook since it only has one narration
 
 interface GenericExplainerProps {
   isActive: boolean;

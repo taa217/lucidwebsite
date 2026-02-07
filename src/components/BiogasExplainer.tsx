@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Leaf, Zap, Flame, Recycle, Database, Activity } from 'lucide-react';
-import { useTTS, useBrowserTTS } from '../hooks/useTTS';
+import { useTTSWithPrefetch, useBrowserTTSFallback } from '../hooks/useTTSWithPrefetch';
 
 // Types for our scene configuration
 interface SceneConfig {
@@ -53,17 +53,19 @@ export const BiogasExplainer: React.FC<BiogasExplainerProps> = ({ isActive, onCo
     }
   };
 
-  // Cartesia TTS
-  const { hasError: cartesiaError } = useTTS({
-    text: sceneData?.narration || "",
-    isPlaying: isActive && !!sceneData && currentScene > 0,
+  // Cartesia TTS with Prefetching - loads next scenes while current plays
+  const { hasError: cartesiaError } = useTTSWithPrefetch({
+    scenes: scenes,
+    currentSceneId: currentScene,
+    isPlaying: isActive && currentScene > 0,
     onComplete: handleSceneComplete,
-    voiceId: "694f9389-aac1-45b6-b726-9d9369183238" // Example voice ID
+    voiceId: "694f9389-aac1-45b6-b726-9d9369183238",
+    prefetchCount: 2 // Prefetch next 2 scenes
   });
 
   // Browser TTS Fallback
-  useBrowserTTS({
-    text: cartesiaError ? (sceneData?.narration || "") : "", // Only use if cartesia error
+  useBrowserTTSFallback({
+    text: cartesiaError ? (sceneData?.narration || "") : "",
     isPlaying: isActive && !!sceneData && currentScene > 0 && cartesiaError,
     onComplete: handleSceneComplete
   });
