@@ -6,6 +6,7 @@ import './App.css';
 import { Navbar } from './components/layout/Navbar';
 import { Home } from './pages/Home';
 import { Explore } from './pages/Explore';
+import { NotFound } from './pages/NotFound';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -14,6 +15,7 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );
