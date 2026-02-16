@@ -2,8 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
-import lightLogo from '../../logo.svg';
-import darkLogo from '../../logoicondark.png';
+import logo from '../../logo.svg';
 
 type NavbarProps = {
   theme: 'light' | 'dark';
@@ -20,7 +19,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme }) => {
     >
       <div className="logo-container">
         <div className="logo-glow"></div>
-        <img src={theme === 'light' ? lightLogo : darkLogo} alt="Lucid logo" />
+        <img src={logo} alt="Lucid logo" />
         <span>Lucid</span>
       </div>
       <nav className="header-nav desktop-nav">
