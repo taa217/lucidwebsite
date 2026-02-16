@@ -173,8 +173,8 @@ export const Home = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          <Link to="/explore" className="btn-glow">
-            Start Learning Free
+          <Link to="https://app.lucid-ai.co" className="btn-glow">
+            Get Started
           </Link>
           <p className="no-cc">No credit card required.</p>
         </motion.div>
