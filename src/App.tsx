@@ -66,7 +66,6 @@ function App() {
               <a href="/">Home</a>
               <a href="/explore">Explore</a>
               <a href="https://tranquil-artist-65.authkit.app/sign-up">Get Started</a>
-              <a href="mailto:clydetadiwa8@gmail;com">Contact</a>
             </div>
           </div>
           <p className="footer-bottom">© {new Date().getFullYear()} Lucid AI. Designed for learners everywhere.</p>
