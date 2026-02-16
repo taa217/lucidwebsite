@@ -388,9 +388,14 @@ export const Home = () => {
         <div className="cta-content">
             <h2>Ready to explore?</h2>
             <p className="cta-sub">Jump into a live session instantly.</p>
-            <Link to="/explore" className="btn-white">
-              View Examples <ArrowRight size={18} style={{ marginLeft: 8 }} />
-            </Link>
+            <div className="cta-buttons" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link to="/explore" className="btn-white">
+                View Examples <ArrowRight size={18} style={{ marginLeft: 8 }} />
+              </Link>
+              <a href="https://app.lucid-ai.co" className="btn-glow">
+                Get Started
+              </a>
+            </div>
         </div>
       </section>
     </motion.div>
