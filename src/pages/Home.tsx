@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Zap, ArrowRight, Sparkles, Brain, MessageSquare, Layers, Target, Radio, Play } from 'lucide-react';
+import { Zap, ArrowRight, Brain, MessageSquare, Layers, Target, Radio, Play } from 'lucide-react';
 import { BiogasAnimation } from '../components/BiogasAnimation';
 import { BiogasExplainer } from '../components/BiogasExplainer';
 import { preloadScenes } from '../hooks/useTTSWithPrefetch';
@@ -91,26 +91,12 @@ const HeroBackground = () => (
 );
 
 export const Home = () => {
-  const [typedText, setTypedText] = useState('');
   const [isDemoPlaying, setIsDemoPlaying] = useState(false);
   const [demoStep, setDemoStep] = useState(0);
   const [sliderValue, setSliderValue] = useState(38);
   const [insightIndex, setInsightIndex] = useState(0);
   const demoSectionRef = useRef<HTMLDivElement | null>(null);
-  const targetText = "Biogas generation";
-  
-  useEffect(() => {
-    let i = 0;
-    const typing = setInterval(() => {
-      if (i < targetText.length) {
-        setTypedText(targetText.slice(0, i + 1));
-        i++;
-      } else {
-        clearInterval(typing);
-      }
-    }, 150);
-    return () => clearInterval(typing);
-  }, []);
+
 
   useEffect(() => () => {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
