@@ -9,7 +9,7 @@ const Scene0 = () => (
     animate={{ scale: 1, opacity: 1, rotateX: [15, 375], rotateY: [-15, 345] }}
     exit={{ scale: 1.2, opacity: 0, filter: "blur(20px)" }}
     transition={{ duration: 7, ease: "linear" }}
-    style={{ width: '250px', height: '250px', transformStyle: 'preserve-3d', position: 'relative' }}
+    style={{ width: 'clamp(200px, 60vw, 250px)', height: 'clamp(200px, 60vw, 250px)', transformStyle: 'preserve-3d', position: 'relative' }}
   >
     {Array.from({ length: 6 }).map((_, i) => (
       <div key={i} style={{
@@ -56,8 +56,8 @@ const Scene1 = () => (
     exit={{ scale: 1.5, opacity: 0, filter: "blur(20px)" }}
     transition={{ duration: 7, ease: "linear" }}
     style={{
-      width: '300px', height: '300px', transformStyle: 'preserve-3d',
-      display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '15px'
+      width: 'clamp(220px, 70vw, 300px)', height: 'clamp(220px, 70vw, 300px)', transformStyle: 'preserve-3d',
+      display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 'clamp(5px, 2vw, 15px)'
     }}
   >
     {Array.from({ length: 25 }).map((_, i) => (
@@ -83,7 +83,7 @@ const Scene2 = () => (
     animate={{ opacity: 1, scale: 1 }}
     exit={{ opacity: 0, filter: "blur(20px)", scale: 1.5 }}
     transition={{ duration: 1 }}
-    style={{ width: '300px', height: '300px', perspective: '800px', position: 'relative' }}
+    style={{ width: 'clamp(220px, 70vw, 300px)', height: 'clamp(220px, 70vw, 300px)', perspective: '800px', position: 'relative' }}
   >
     {Array.from({ length: 8 }).map((_, i) => (
       <motion.div
@@ -109,7 +109,7 @@ const Scene3 = () => (
     animate={{ scale: 1.2, opacity: 1, rotateY: [90, 180], rotateX: 45 }}
     exit={{ scale: 2, opacity: 0, filter: "blur(20px)" }}
     transition={{ duration: 7, ease: "easeInOut" }}
-    style={{ width: '180px', height: '180px', transformStyle: 'preserve-3d', position: 'relative' }}
+    style={{ width: 'clamp(140px, 50vw, 180px)', height: 'clamp(140px, 50vw, 180px)', transformStyle: 'preserve-3d', position: 'relative' }}
   >
     {[...Array(8)].map((_, i) => (
       <motion.div
@@ -183,6 +183,7 @@ const VideoLessonVisualizer = () => {
     <div className="video-lesson-container" style={{
       width: '100%',
       aspectRatio: '16/9',
+      minHeight: '400px',
       background: '#030712',
       position: 'relative',
       overflow: 'hidden',
@@ -223,12 +224,12 @@ const VideoLessonVisualizer = () => {
       {/* Video Player UI Overlay */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0,
-        padding: '30px 24px 20px',
+        padding: 'clamp(16px, 4vw, 30px) clamp(16px, 4vw, 24px) clamp(16px, 4vw, 20px)',
         background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, transparent 100%)',
         zIndex: 20,
         display: 'flex', flexDirection: 'column', gap: '16px'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <AnimatePresence mode="wait">
               <motion.h3
@@ -237,16 +238,16 @@ const VideoLessonVisualizer = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.5 }}
-                style={{ margin: 0, color: '#fff', fontSize: '22px', fontWeight: 600, textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}
+                style={{ margin: 0, color: '#fff', fontSize: 'clamp(16px, 4.5vw, 22px)', fontWeight: 600, textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}
               >
                 {data.title}
               </motion.h3>
             </AnimatePresence>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '8px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.8)', fontSize: '14px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(6px, 2vw, 12px)', marginTop: '8px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.8)', fontSize: '13px' }}>
                 <AnimatePresence mode="wait">
                   <motion.div key={data.theme} initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} transition={{ duration: 0.3 }}>
-                    <Icon size={16} color={data.bg2} />
+                    <Icon size={14} color={data.bg2} />
                   </motion.div>
                 </AnimatePresence>
                 <AnimatePresence mode="wait">
@@ -256,14 +257,14 @@ const VideoLessonVisualizer = () => {
                 </AnimatePresence>
               </div>
               <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'rgba(255,255,255,0.3)' }} />
-              <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>Interactive 3D Mode</span>
+              <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '13px' }}>Interactive 3D Mode</span>
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
-             <button style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '8px 16px', borderRadius: '8px', color: '#fff', fontSize: '14px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', backdropFilter: 'blur(10px)' }}>
-               <Target size={16} /> Track Path
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+             <button style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '6px 12px', borderRadius: '8px', color: '#fff', fontSize: '13px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', backdropFilter: 'blur(10px)' }}>
+               <Target size={14} /> Track Path
              </button>
-             <button style={{ background: '#00f6bb', border: 'none', padding: '8px 20px', borderRadius: '8px', color: '#020613', fontSize: '14px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,246,187,0.4)' }}>
+             <button style={{ background: '#00f6bb', border: 'none', padding: '6px 16px', borderRadius: '8px', color: '#020613', fontSize: '13px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,246,187,0.4)' }}>
                Join Live
              </button>
           </div>
