@@ -165,7 +165,7 @@ const VideoLessonVisualizer = () => {
     const sceneTimer = setInterval(() => {
       setSceneIndex(prev => (prev + 1) % sceneData.length);
     }, 7000);
-    
+
     const timeTimer = setInterval(() => {
       setTime(prev => (prev + 1) % 28);
     }, 1000);
@@ -243,45 +243,48 @@ const VideoLessonVisualizer = () => {
                 {data.title}
               </motion.h3>
             </AnimatePresence>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(6px, 2vw, 12px)', marginTop: '8px', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.8)', fontSize: '13px' }}>
-                <AnimatePresence mode="wait">
-                  <motion.div key={data.theme} initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} transition={{ duration: 0.3 }}>
-                    <Icon size={14} color={data.bg2} />
-                  </motion.div>
-                </AnimatePresence>
-                <AnimatePresence mode="wait">
-                  <motion.span key={data.theme} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-                    {data.theme}
-                  </motion.span>
-                </AnimatePresence>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '3px', marginTop: '12px', height: '24px' }}>
+              <div style={{ marginRight: '12px', display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.05)', padding: '4px 8px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <motion.div
+                  animate={{ opacity: [1, 0.3, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#f43f5e', boxShadow: '0 0 10px #f43f5e' }}
+                />
+                <span style={{ fontSize: '10px', fontWeight: 700, color: 'rgba(255,255,255,0.8)', letterSpacing: '1px' }}>Lucid</span>
               </div>
-              <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'rgba(255,255,255,0.3)' }} />
-              <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '13px' }}>Interactive 3D Mode</span>
+              {Array.from({ length: 32 }).map((_, i) => {
+                const envelope = Math.sin((i / 31) * Math.PI);
+                return (
+                  <motion.div
+                    key={`wave-${i}`}
+                    animate={{ height: [`${15 + envelope * 15}%`, `${40 + Math.random() * 20 + envelope * 40}%`, `${15 + envelope * 15}%`] }}
+                    transition={{ duration: 0.3 + Math.random() * 0.4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: Math.random() * 0.8 }}
+                    style={{ width: '3px', background: data.bg2, borderRadius: '2px', opacity: 0.9, transition: 'background 0.5s ease' }}
+                  />
+                );
+              })}
             </div>
           </div>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-             <button style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '6px 12px', borderRadius: '8px', color: '#fff', fontSize: '13px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', backdropFilter: 'blur(10px)' }}>
-               <Target size={14} /> Track Path
-             </button>
-             <button style={{ background: '#00f6bb', border: 'none', padding: '6px 16px', borderRadius: '8px', color: '#020613', fontSize: '13px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,246,187,0.4)' }}>
-               Join Live
-             </button>
+            <a href="https://app.lucid-ai.co" style={{ background: '#00f6bb', border: 'none', padding: '6px 16px', borderRadius: '8px', color: '#020613', fontSize: '13px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 4px 15px rgba(0,246,187,0.4)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+              Get Started
+            </a>
           </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.2)', borderRadius: '3px', position: 'relative', cursor: 'pointer', overflow: 'hidden' }}>
-             <motion.div
-               animate={{ width: ['0%', '100%'] }}
-               transition={{ duration: 28, ease: "linear", repeat: Infinity }}
-               style={{ position: 'absolute', top: 0, left: 0, height: '100%', background: `linear-gradient(90deg, ${data.bg1}, ${data.bg2})`, transition: 'background 0.5s ease' }}
-             />
-             <motion.div 
-               animate={{ left: ['0%', 'calc(100% - 10px)'] }}
-               transition={{ duration: 28, ease: "linear", repeat: Infinity }}
-               style={{ position: 'absolute', top: 0, width: '10px', height: '100%', background: '#fff', boxShadow: '0 0 10px #fff' }}
-             />
+            <motion.div
+              animate={{ width: ['0%', '100%'] }}
+              transition={{ duration: 28, ease: "linear", repeat: Infinity }}
+              style={{ position: 'absolute', top: 0, left: 0, height: '100%', background: `linear-gradient(90deg, ${data.bg1}, ${data.bg2})`, transition: 'background 0.5s ease' }}
+            />
+            <motion.div
+              animate={{ left: ['0%', 'calc(100% - 10px)'] }}
+              transition={{ duration: 28, ease: "linear", repeat: Infinity }}
+              style={{ position: 'absolute', top: 0, width: '10px', height: '100%', background: '#fff', boxShadow: '0 0 10px #fff' }}
+            />
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', color: 'rgba(255,255,255,0.6)', fontSize: '13px', fontWeight: 500, fontFamily: 'monospace' }}>
             <span>00:{time.toString().padStart(2, '0')}</span>
@@ -310,7 +313,7 @@ const HeroBackground = () => (
           <stop offset="0%" stopColor="var(--mountain-front-top, #05112b)" />
           <stop offset="100%" stopColor="var(--mountain-front-bottom, #020613)" />
         </linearGradient>
-        
+
         {/* Foothill Gradients fading into background */}
         <linearGradient id="hillGrad1" x1="0" y1="500" x2="0" y2="900" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="var(--mountain-front-bottom, #020613)" stopOpacity="0.9" />
@@ -320,7 +323,7 @@ const HeroBackground = () => (
           <stop offset="0%" stopColor="var(--mountain-front-bottom, #020613)" stopOpacity="0.5" />
           <stop offset="100%" stopColor="var(--bg)" stopOpacity="1" />
         </linearGradient>
-        
+
         {/* Glowing Data Stream Gradients */}
         <linearGradient id="streamGrad1" x1="0" y1="300" x2="0" y2="1400" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.8" />
@@ -339,39 +342,39 @@ const HeroBackground = () => (
         </linearGradient>
 
         <filter id="glow">
-          <feGaussianBlur stdDeviation="30" result="coloredBlur"/>
+          <feGaussianBlur stdDeviation="30" result="coloredBlur" />
           <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
         <filter id="glow-small">
-          <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+          <feGaussianBlur stdDeviation="8" result="coloredBlur" />
           <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
       </defs>
-      
+
       {/* Sky */}
       <rect width="1440" height="1600" fill="url(#skyGrad)" opacity="0.8" />
-      
+
       {/* Sun/Core */}
       <circle cx="1100" cy="400" r="140" fill="var(--primary)" filter="url(#glow)" opacity="0.4" />
       <circle cx="1100" cy="400" r="80" fill="#fff" filter="url(#glow)" opacity="0.9" />
 
       {/* Background Mountains */}
-      <path d="M0 350 L250 200 L500 330 L800 100 L1150 350 L1440 200 L1440 1600 L0 1600 Z" fill="url(#mountainGrad1)" opacity="0.8"/>
-      
+      <path d="M0 350 L250 200 L500 330 L800 100 L1150 350 L1440 200 L1440 1600 L0 1600 Z" fill="url(#mountainGrad1)" opacity="0.8" />
+
       {/* Foreground Mountains */}
       <path d="M0 500 L350 300 L700 500 L1050 250 L1440 450 L1440 1600 L0 1600 Z" fill="url(#mountainGrad2)" />
 
       {/* Energy Streams / Data Pathways falling behind foothills */}
-      <path d="M350 300 Q 250 600 400 900 T 200 1400" fill="none" stroke="url(#streamGrad1)" strokeWidth="3" filter="url(#glow-small)" opacity="0.7"/>
-      <path d="M1050 250 Q 1200 550 950 850 T 1150 1350" fill="none" stroke="url(#streamGrad2)" strokeWidth="4" filter="url(#glow-small)" opacity="0.8"/>
-      <path d="M700 500 Q 550 750 800 1050 T 650 1500" fill="none" stroke="url(#streamGrad3)" strokeWidth="2" filter="url(#glow-small)" opacity="0.6"/>
-      
+      <path d="M350 300 Q 250 600 400 900 T 200 1400" fill="none" stroke="url(#streamGrad1)" strokeWidth="3" filter="url(#glow-small)" opacity="0.7" />
+      <path d="M1050 250 Q 1200 550 950 850 T 1150 1350" fill="none" stroke="url(#streamGrad2)" strokeWidth="4" filter="url(#glow-small)" opacity="0.8" />
+      <path d="M700 500 Q 550 750 800 1050 T 650 1500" fill="none" stroke="url(#streamGrad3)" strokeWidth="2" filter="url(#glow-small)" opacity="0.6" />
+
       {/* Data Nodes */}
       <circle cx="400" cy="900" r="5" fill="var(--primary)" filter="url(#glow-small)" opacity="0.8" />
       <circle cx="950" cy="850" r="6" fill="#7C3AED" filter="url(#glow-small)" opacity="0.8" />
@@ -387,18 +390,18 @@ const HeroBackground = () => (
 
 export const Home = () => {
   return (
-    <motion.div 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }} 
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="page-content"
     >
       <div className="hero-and-demo-container">
         <HeroBackground />
-        
+
         <section className="hero-impressive cluely-style-hero">
           <div className="hero-content-wrapper">
-            <motion.h1 
+            <motion.h1
               className="mega-headline cluely-headline"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -407,8 +410,8 @@ export const Home = () => {
               Interactive Lessons. <br />
               Generated by AI.
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               className="hero-sub cluely-sub"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -417,15 +420,15 @@ export const Home = () => {
               Lucid turns any topic into an interactive, personalized journey. No videos to skip. No generic explanations. All tailored to your exact learning style.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               className="hero-ctas cluely-ctas"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
-              <a 
+              <a
                 href="https://app.lucid-ai.co"
-                className="btn-glow cluely-main-btn" 
+                className="btn-glow cluely-main-btn"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}
               >
                 <Zap size={20} fill="currentColor" /> Generate a Lesson
@@ -434,29 +437,29 @@ export const Home = () => {
           </div>
         </section>
 
-      <section className="demo-showcase cluely-showcase">
-        <div className="glass-frame active">
-          <div className="app-window">
-            <div className="window-header">
-              <div className="dots"><span></span><span></span><span></span></div>
-              <div className="address-bar">app.lucid-ai.co/lesson/neural-topology</div>
+        <section className="demo-showcase cluely-showcase">
+          <div className="glass-frame active">
+            <div className="app-window">
+              <div className="window-header">
+                <div className="dots"><span></span><span></span><span></span></div>
+                <div className="address-bar">app.lucid-ai.co/lesson/neural-topology</div>
+              </div>
+              <div className="window-content" style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}>
+                <VideoLessonVisualizer />
+              </div>
             </div>
-            <div className="window-content" style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}>
-              <VideoLessonVisualizer />
-            </div>
+            <div className="glow-effect"></div>
           </div>
-          <div className="glow-effect"></div>
-        </div>
-      </section>
+        </section>
       </div>
 
       {/* Method Section Integrated */}
       <section className="value-prop">
         <div className="section-title">
           <motion.h2
-             initial={{ y: 20, opacity: 0 }}
-             whileInView={{ y: 0, opacity: 1 }}
-             viewport={{ once: true }}
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
           >
             The Knowledge Engine
           </motion.h2>
@@ -469,9 +472,9 @@ export const Home = () => {
             Passive video lectures are obsolete. Lucid is an active learning engine that deconstructs complexity.
           </motion.p>
         </div>
-        
+
         <div className="bento-grid">
-          <motion.div 
+          <motion.div
             className="bento-card"
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -483,7 +486,7 @@ export const Home = () => {
             <div className="card-visual visual-graph"></div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="bento-card"
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -495,7 +498,7 @@ export const Home = () => {
             <p>It doesn't just lecture. It asks questions, challenges assumptions, and ensures you actually get it.</p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="bento-card"
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -507,7 +510,7 @@ export const Home = () => {
             <p>Switch instantly between text, voice, and interactive visuals to match your learning style.</p>
           </motion.div>
 
-           <motion.div 
+          <motion.div
             className="bento-card"
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -519,7 +522,7 @@ export const Home = () => {
             <p>We map your knowledge graph and identify missing prerequisites before you even realize you're stuck.</p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="bento-card"
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -532,19 +535,19 @@ export const Home = () => {
           </motion.div>
         </div>
       </section>
-      
+
       <section className="explore-teaser">
         <div className="cta-content">
-            <h2>Ready to explore?</h2>
-            <p className="cta-sub">Jump into a live session instantly.</p>
-            <div className="cta-buttons" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link to="/explore" className="btn-white">
-                View Examples <ArrowRight size={18} style={{ marginLeft: 8 }} />
-              </Link>
-              <a href="https://app.lucid-ai.co" className="btn-glow">
-                Get Started
-              </a>
-            </div>
+          <h2>Ready to explore?</h2>
+          <p className="cta-sub">Jump into a live session instantly.</p>
+          <div className="cta-buttons" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/explore" className="btn-white">
+              View Examples <ArrowRight size={18} style={{ marginLeft: 8 }} />
+            </Link>
+            <a href="https://app.lucid-ai.co" className="btn-glow">
+              Get Started
+            </a>
+          </div>
         </div>
       </section>
     </motion.div>
