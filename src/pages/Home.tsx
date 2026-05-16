@@ -1,8 +1,184 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Zap, ArrowRight, Brain, MessageSquare, Layers, Target } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Zap, ArrowRight, Brain, MessageSquare, Layers, Target, Activity, Cpu } from 'lucide-react';
+
+const Scene0 = () => (
+  <motion.div
+    initial={{ scale: 0.8, opacity: 0, rotateX: 60 }}
+    animate={{ scale: 1, opacity: 1, rotateX: [15, 375], rotateY: [-15, 345] }}
+    exit={{ scale: 1.2, opacity: 0, filter: "blur(20px)" }}
+    transition={{ duration: 7, ease: "linear" }}
+    style={{ width: '250px', height: '250px', transformStyle: 'preserve-3d', position: 'relative' }}
+  >
+    {Array.from({ length: 6 }).map((_, i) => (
+      <div key={i} style={{
+        position: 'absolute', inset: 0,
+        border: `2px solid ${i % 2 === 0 ? 'rgba(0, 246, 187, 0.6)' : 'rgba(124, 58, 237, 0.6)'}`,
+        borderRadius: '50%',
+        transform: `rotateX(${i * 30}deg) rotateY(${i * 60}deg)`,
+        boxShadow: `0 0 20px ${i % 2 === 0 ? 'rgba(0, 246, 187, 0.3)' : 'rgba(124, 58, 237, 0.3)'}`,
+      }} />
+    ))}
+    <motion.div
+      animate={{ scale: [0.9, 1.2, 0.9], rotateZ: [0, 180, 360] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      style={{
+        position: 'absolute', top: '30%', left: '30%', width: '40%', height: '40%',
+        borderRadius: '50%', background: 'radial-gradient(circle, #fff 10%, #00f6bb 40%, transparent 80%)',
+        boxShadow: '0 0 50px #00f6bb', transformStyle: 'preserve-3d'
+      }}
+    />
+    {Array.from({ length: 15 }).map((_, i) => (
+      <motion.div
+        key={`node-${i}`}
+        animate={{ rotateY: [0, 360], rotateZ: [0, 360] }}
+        transition={{ duration: 8 + i * 0.5, repeat: Infinity, ease: "linear", delay: i * 0.1 }}
+        style={{
+          position: 'absolute', top: '50%', left: '50%', width: '100%', height: '100%',
+          transformStyle: 'preserve-3d', transformOrigin: 'center'
+        }}
+      >
+        <div style={{
+          position: 'absolute', top: `${(i * 17) % 100}%`, left: `${(i * 23) % 100}%`,
+          width: '6px', height: '6px', borderRadius: '50%', background: '#fff',
+          boxShadow: '0 0 10px #fff, 0 0 20px #00f6bb', transform: `translateZ(${50 + (i * 10)}px)`
+        }} />
+      </motion.div>
+    ))}
+  </motion.div>
+);
+
+const Scene1 = () => (
+  <motion.div
+    initial={{ scale: 0.5, opacity: 0, rotateX: 60, rotateZ: -45 }}
+    animate={{ scale: 1, opacity: 1, rotateZ: [45, 90] }}
+    exit={{ scale: 1.5, opacity: 0, filter: "blur(20px)" }}
+    transition={{ duration: 7, ease: "linear" }}
+    style={{
+      width: '300px', height: '300px', transformStyle: 'preserve-3d',
+      display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '15px'
+    }}
+  >
+    {Array.from({ length: 25 }).map((_, i) => (
+      <motion.div
+        key={i}
+        initial={{ translateZ: 0 }}
+        animate={{ translateZ: [0, Math.sin(i) * 50, 0], opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 3, repeat: Infinity, delay: i * 0.1, ease: "easeInOut" }}
+        style={{
+          width: '100%', height: '100%', borderRadius: '4px',
+          background: 'rgba(6, 182, 212, 0.8)',
+          boxShadow: '0 0 15px rgba(6, 182, 212, 0.5)',
+          border: '1px solid #fff'
+        }}
+      />
+    ))}
+  </motion.div>
+);
+
+const Scene2 = () => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ opacity: 0, filter: "blur(20px)", scale: 1.5 }}
+    transition={{ duration: 1 }}
+    style={{ width: '300px', height: '300px', perspective: '800px', position: 'relative' }}
+  >
+    {Array.from({ length: 8 }).map((_, i) => (
+      <motion.div
+        key={i}
+        initial={{ translateZ: -1000, opacity: 0, rotateZ: i * 15 }}
+        animate={{ translateZ: [-1000, 600], opacity: [0, 1, 0], rotateZ: i * 15 + 90 }}
+        transition={{ duration: 5, repeat: Infinity, delay: i * 0.6, ease: "linear" }}
+        style={{
+          position: 'absolute', inset: '10%',
+          border: '3px solid #f43f5e',
+          borderRadius: '30%',
+          boxShadow: '0 0 20px #f43f5e, inset 0 0 20px #8b5cf6',
+          transformOrigin: 'center'
+        }}
+      />
+    ))}
+  </motion.div>
+);
+
+const Scene3 = () => (
+  <motion.div
+    initial={{ scale: 0, opacity: 0, rotateY: -90 }}
+    animate={{ scale: 1.2, opacity: 1, rotateY: [90, 180], rotateX: 45 }}
+    exit={{ scale: 2, opacity: 0, filter: "blur(20px)" }}
+    transition={{ duration: 7, ease: "easeInOut" }}
+    style={{ width: '180px', height: '180px', transformStyle: 'preserve-3d', position: 'relative' }}
+  >
+    {[...Array(8)].map((_, i) => (
+      <motion.div
+        key={i}
+        animate={{ rotateZ: [0, 90], scale: [1, 1.1, 1] }}
+        transition={{ duration: 4, repeat: Infinity, delay: i * 0.2, ease: "easeInOut" }}
+        style={{
+          position: 'absolute', inset: 0,
+          border: '2px solid #eab308',
+          background: 'rgba(234, 179, 8, 0.1)',
+          transform: `translateZ(${(i - 4) * 20}px)`,
+          boxShadow: '0 0 15px rgba(234,179,8,0.2)'
+        }}
+      />
+    ))}
+  </motion.div>
+);
+
+const sceneData = [
+  {
+    title: "Lesson 01: Core Neural Topology",
+    theme: "Lucid Engine",
+    bg1: "#7c3aed", bg2: "#00f6bb",
+    icon: Brain
+  },
+  {
+    title: "Lesson 02: Quantum Data Arrays",
+    theme: "Grid Mode",
+    bg1: "#06b6d4", bg2: "#3b82f6",
+    icon: Layers
+  },
+  {
+    title: "Lesson 03: Hyper-dimensional Warp",
+    theme: "Z-Space Traverse",
+    bg1: "#f43f5e", bg2: "#8b5cf6",
+    icon: Activity
+  },
+  {
+    title: "Lesson 04: Geometric Manifolds",
+    theme: "Construct Mode",
+    bg1: "#eab308", bg2: "#06b6d4",
+    icon: Cpu
+  }
+];
+
+const scenes = [<Scene0 key="0" />, <Scene1 key="1" />, <Scene2 key="2" />, <Scene3 key="3" />];
+
 const VideoLessonVisualizer = () => {
+  const [sceneIndex, setSceneIndex] = useState(0);
+  const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    const sceneTimer = setInterval(() => {
+      setSceneIndex(prev => (prev + 1) % sceneData.length);
+    }, 7000);
+    
+    const timeTimer = setInterval(() => {
+      setTime(prev => (prev + 1) % 28);
+    }, 1000);
+
+    return () => {
+      clearInterval(sceneTimer);
+      clearInterval(timeTimer);
+    };
+  }, []);
+
+  const data = sceneData[sceneIndex];
+  const Icon = data.icon;
+
   return (
     <div className="video-lesson-container" style={{
       width: '100%',
@@ -12,86 +188,36 @@ const VideoLessonVisualizer = () => {
       overflow: 'hidden',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      borderRadius: '12px',
+      border: '1px solid rgba(255, 255, 255, 0.05)',
+      boxShadow: '0 25px 50px -12px rgba(0,0,0,0.7)'
     }}>
       {/* Dynamic Background */}
-      <motion.div
-        animate={{ opacity: [0.15, 0.3, 0.15], scale: [0.9, 1.2, 0.9] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        style={{ position: 'absolute', width: '60%', height: '60%', background: '#7c3aed', filter: 'blur(120px)', borderRadius: '50%' }}
-      />
-      <motion.div
-        animate={{ opacity: [0.1, 0.25, 0.1], scale: [1.1, 0.8, 1.1] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        style={{ position: 'absolute', width: '50%', height: '50%', background: '#00f6bb', filter: 'blur(100px)', borderRadius: '50%', top: '20%', right: '10%' }}
-      />
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          key={`bg1-${sceneIndex}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.25 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 2 }}
+          style={{ position: 'absolute', width: '60%', height: '60%', background: data.bg1, filter: 'blur(120px)', borderRadius: '50%' }}
+        />
+        <motion.div
+          key={`bg2-${sceneIndex}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.2 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 2, delay: 0.5 }}
+          style={{ position: 'absolute', width: '50%', height: '50%', background: data.bg2, filter: 'blur(100px)', borderRadius: '50%', top: '20%', right: '10%' }}
+        />
+      </AnimatePresence>
 
       {/* 3D Moving Composition */}
       <div style={{ perspective: '1500px', zIndex: 10, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <motion.div
-          animate={{ rotateX: [15, 375], rotateY: [-15, 345] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          style={{ width: '250px', height: '250px', transformStyle: 'preserve-3d', position: 'relative' }}
-        >
-          {/* Geometric Rings */}
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} style={{
-              position: 'absolute',
-              inset: 0,
-              border: `2px solid ${i % 2 === 0 ? 'rgba(0, 246, 187, 0.6)' : 'rgba(124, 58, 237, 0.6)'}`,
-              borderRadius: '50%',
-              transform: `rotateX(${i * 30}deg) rotateY(${i * 60}deg)`,
-              boxShadow: `0 0 20px ${i % 2 === 0 ? 'rgba(0, 246, 187, 0.3)' : 'rgba(124, 58, 237, 0.3)'}`,
-            }} />
-          ))}
-
-          {/* Core Energy Sphere */}
-          <motion.div
-            animate={{ scale: [0.9, 1.2, 0.9], rotateZ: [0, 180, 360] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            style={{
-              position: 'absolute',
-              top: '30%',
-              left: '30%',
-              width: '40%',
-              height: '40%',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, #fff 10%, #00f6bb 40%, transparent 80%)',
-              boxShadow: '0 0 50px #00f6bb',
-              transformStyle: 'preserve-3d'
-            }}
-          />
-
-          {/* Floating Data Nodes */}
-          {Array.from({ length: 15 }).map((_, i) => (
-            <motion.div
-              key={`node-${i}`}
-              animate={{ rotateY: [0, 360], rotateZ: [0, 360] }}
-              transition={{ duration: 8 + i * 0.5, repeat: Infinity, ease: "linear", delay: i * 0.1 }}
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                width: '100%',
-                height: '100%',
-                transformStyle: 'preserve-3d',
-                transformOrigin: 'center'
-              }}
-            >
-              <div style={{
-                position: 'absolute',
-                top: `${(i * 17) % 100}%`,
-                left: `${(i * 23) % 100}%`,
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                background: '#fff',
-                boxShadow: '0 0 10px #fff, 0 0 20px #00f6bb',
-                transform: `translateZ(${50 + (i * 10)}px)`
-              }} />
-            </motion.div>
-          ))}
-        </motion.div>
+        <AnimatePresence mode="wait">
+          {scenes[sceneIndex]}
+        </AnimatePresence>
       </div>
 
       {/* Video Player UI Overlay */}
@@ -104,13 +230,30 @@ const VideoLessonVisualizer = () => {
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <div>
-            <h3 style={{ margin: 0, color: '#fff', fontSize: '22px', fontWeight: 600, textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
-              Neural Architecture & Hyperdimensional Topology
-            </h3>
+            <AnimatePresence mode="wait">
+              <motion.h3
+                key={data.title}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.5 }}
+                style={{ margin: 0, color: '#fff', fontSize: '22px', fontWeight: 600, textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}
+              >
+                {data.title}
+              </motion.h3>
+            </AnimatePresence>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '8px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.8)', fontSize: '14px' }}>
-                <Brain size={16} color="#00f6bb" />
-                <span>Lucid Engine</span>
+                <AnimatePresence mode="wait">
+                  <motion.div key={data.theme} initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} transition={{ duration: 0.3 }}>
+                    <Icon size={16} color={data.bg2} />
+                  </motion.div>
+                </AnimatePresence>
+                <AnimatePresence mode="wait">
+                  <motion.span key={data.theme} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+                    {data.theme}
+                  </motion.span>
+                </AnimatePresence>
               </div>
               <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'rgba(255,255,255,0.3)' }} />
               <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>Interactive 3D Mode</span>
@@ -130,18 +273,18 @@ const VideoLessonVisualizer = () => {
           <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.2)', borderRadius: '3px', position: 'relative', cursor: 'pointer', overflow: 'hidden' }}>
              <motion.div
                animate={{ width: ['0%', '100%'] }}
-               transition={{ duration: 180, ease: "linear", repeat: Infinity }}
-               style={{ position: 'absolute', top: 0, left: 0, height: '100%', background: 'linear-gradient(90deg, #7c3aed, #00f6bb)' }}
+               transition={{ duration: 28, ease: "linear", repeat: Infinity }}
+               style={{ position: 'absolute', top: 0, left: 0, height: '100%', background: `linear-gradient(90deg, ${data.bg1}, ${data.bg2})`, transition: 'background 0.5s ease' }}
              />
              <motion.div 
-               animate={{ left: ['0%', '100%'] }}
-               transition={{ duration: 180, ease: "linear", repeat: Infinity }}
+               animate={{ left: ['0%', 'calc(100% - 10px)'] }}
+               transition={{ duration: 28, ease: "linear", repeat: Infinity }}
                style={{ position: 'absolute', top: 0, width: '10px', height: '100%', background: '#fff', boxShadow: '0 0 10px #fff' }}
              />
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', color: 'rgba(255,255,255,0.6)', fontSize: '13px', fontWeight: 500, fontFamily: 'monospace' }}>
-            <span>04:23</span>
-            <span>-12:08</span>
+            <span>00:{time.toString().padStart(2, '0')}</span>
+            <span>-00:{Math.max(0, 28 - time).toString().padStart(2, '0')}</span>
           </div>
         </div>
       </div>
