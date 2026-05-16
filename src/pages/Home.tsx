@@ -177,7 +177,6 @@ const VideoLessonVisualizer = () => {
   }, []);
 
   const data = sceneData[sceneIndex];
-  const Icon = data.icon;
 
   return (
     <div className="video-lesson-container" style={{
