@@ -428,9 +428,9 @@ export const Home = () => {
               <a
                 href="https://app.lucid-ai.co"
                 className="btn-glow cluely-main-btn"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none', borderRadius: '50px' }}
               >
-                <Zap size={20} fill="currentColor" /> Generate a Lesson
+                <Zap size={20} fill="currentColor" /> Get Started
               </a>
             </motion.div>
           </div>
@@ -441,7 +441,7 @@ export const Home = () => {
             <div className="app-window">
               <div className="window-header">
                 <div className="dots"><span></span><span></span><span></span></div>
-                <div className="address-bar">app.lucid-ai.co/lesson/neural-topology</div>
+                <div className="address-bar">app.lucid-ai.co/lesson/1</div>
               </div>
               <div className="window-content" style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}>
                 <VideoLessonVisualizer />
