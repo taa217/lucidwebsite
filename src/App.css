@@ -204,6 +204,12 @@ body {
   width: 100%;
 }
 
+.hero-and-demo-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* This now contains the overflow for both sections */
+}
+
 /* Hero Impressive - Cluely Style */
 .cluely-style-hero {
   position: relative;
@@ -211,7 +217,6 @@ body {
   padding: 120px 20px 240px; /* Extra bottom padding for overlap */
   margin: 0;
   width: 100%;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -225,7 +230,6 @@ body {
   width: 100%;
   height: 100%;
   z-index: 0;
-  overflow: hidden;
 }
 
 .hero-svg-bg {
@@ -240,7 +244,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, transparent 60%, var(--bg) 100%);
+  background: linear-gradient(180deg, transparent 70%, var(--bg) 100%);
   pointer-events: none;
 }
 
