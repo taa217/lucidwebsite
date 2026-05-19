@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Home, Search, ArrowLeft } from 'lucide-react';
+import { Home, Zap, ArrowLeft } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -42,10 +42,10 @@ export const NotFound: React.FC = () => (
         <Home size={18} />
         Back to Home
       </Link>
-      <Link to="/explore" className="not-found-btn secondary">
-        <Search size={18} />
-        Explore Lessons
-      </Link>
+      <a href="https://app.lucid-ai.co" className="not-found-btn secondary">
+        <Zap size={18} />
+        Get Started
+      </a>
     </motion.div>
 
     <motion.button

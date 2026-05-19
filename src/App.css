@@ -724,7 +724,7 @@ body {
 }
 
 /* Bento Grid & Examples */
-.value-prop, .live-examples {
+.value-prop {
   padding: 100px 20px;
   max-width: 1200px;
   margin: 0 auto;
@@ -803,78 +803,36 @@ body {
   margin-bottom: 32px;
 }
 
-.btn-white {
-  background: #fff;
+.cta-btn {
+  background: var(--primary);
   color: #0D1B3E;
-  padding: 16px 40px;
+  padding: 18px 48px;
   border-radius: 100px;
   font-weight: 700;
   font-size: 18px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  transition: transform 0.2s;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow:
+    0 8px 32px rgba(0, 246, 187, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-white:hover {
-  transform: scale(1.05);
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 14px 44px rgba(0, 246, 187, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.18) inset;
 }
 
-/* Examples Grid View */
-.examples-row.grid-view {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
+.cta-btn:active {
+  transform: translateY(-1px);
 }
-
-.example-tile {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 32px;
-  text-decoration: none;
-  transition: all 0.3s;
-  display: flex;
-  flex-direction: column;
-  height: 240px;
-  justify-content: space-between;
-}
-
-.example-tile:hover {
-  transform: translateY(-4px);
-  border-color: rgba(0, 246, 187, 0.3);
-  box-shadow: var(--shadow-soft);
-}
-
-.tile-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.subject-tag {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-muted);
-  background: rgba(13, 27, 62, 0.06);
-  padding: 4px 10px;
-  border-radius: 100px;
-}
-
-.example-tile h3 { font-size: 26px; color: var(--text-main); margin: 0; font-weight: 700; }
-
-.arrow-link {
-  color: var(--primary);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  font-size: 15px;
-  transition: gap 0.2s;
-}
-
-.example-tile:hover .arrow-link { gap: 12px; }
 
 /* Footer */
 .site-footer {

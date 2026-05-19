@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, ArrowRight, Brain, MessageSquare, Layers, Target, Activity, Cpu } from 'lucide-react';
 
@@ -537,16 +536,13 @@ export const Home = () => {
 
       <section className="explore-teaser">
         <div className="cta-content">
-          <h2>Ready to explore?</h2>
+          <h2>Ready to get started?</h2>
           <p className="cta-sub">Jump into a live session instantly.</p>
-          <div className="cta-buttons" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/explore" className="btn-white">
-              View Examples <ArrowRight size={18} style={{ marginLeft: 8 }} />
-            </Link>
-            <a href="https://app.lucid-ai.co" className="btn-glow">
-              Get Started
-            </a>
-          </div>
+          <a href="https://app.lucid-ai.co" className="cta-btn">
+            <Zap size={20} fill="currentColor" />
+            Get Started
+            <ArrowRight size={20} />
+          </a>
         </div>
       </section>
     </motion.div>

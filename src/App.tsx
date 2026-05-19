@@ -5,7 +5,6 @@ import { Instagram, Twitter, Facebook, Linkedin } from 'lucide-react';
 import './App.css';
 import { Navbar } from './components/layout/Navbar';
 import { Home } from './pages/Home';
-import { Explore } from './pages/Explore';
 import { NotFound } from './pages/NotFound';
 
 const AnimatedRoutes = () => {
@@ -14,7 +13,6 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
@@ -64,7 +62,6 @@ function App() {
             <div>
               <h4>Product</h4>
               <a href="/">Home</a>
-              <a href="/explore">Explore</a>
               <a href="https://app.lucid-ai.co">Get Started</a>
             </div>
           </div>
