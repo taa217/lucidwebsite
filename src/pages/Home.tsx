@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Zap, ArrowRight, Brain, MessageSquare, Layers, Target, Activity, Cpu } from 'lucide-react';
+import { Zap, ArrowRight, Brain, Layers, Activity, Cpu } from 'lucide-react';
 
 const Scene0 = () => (
   <motion.div
@@ -294,6 +294,263 @@ const VideoLessonVisualizer = () => {
   );
 };
 
+const CognitiveTracker = () => {
+  return (
+    <div className="adaptive-learning-visualizer">
+      <div className="dashboard-header" style={{ marginBottom: '16px' }}>
+        <div className="status-active">
+          <div className="status-dot"></div>
+          Adaptive Mapping
+        </div>
+        <div className="dashboard-label">Live Tracker</div>
+      </div>
+
+      <div className="visualizer-flow" style={{ flexGrow: 1 }}>
+        {/* Column 1: Clicks & Interactions */}
+        <div className="flow-step">
+          <div className="step-badge">1. Interactions</div>
+          <div className="interaction-cards">
+            <div className="interaction-card">
+              <span className="card-emoji">❓</span>
+              <div className="card-text">
+                <strong>Analogy Request</strong>
+              </div>
+            </div>
+            <div className="interaction-card stuck-detected">
+              <span className="card-emoji">⏱️</span>
+              <div className="card-text">
+                <strong>Stuck Detected</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Central processor connector */}
+        <div className="flow-connector">
+          <div className="connector-line">
+            <div className="glowing-pulse"></div>
+          </div>
+          <div className="connector-text">Lucid Maps Path</div>
+        </div>
+
+        {/* Column 2: Custom Adapted Lesson Path */}
+        <div className="flow-step">
+          <div className="step-badge success">2. Custom Pathway</div>
+          <div className="pathway-steps">
+            <div className="path-step completed">
+              <div className="path-dot">✓</div>
+              <div className="card-text">
+                <strong>Prereqs Filled</strong>
+              </div>
+            </div>
+            <div className="path-step active">
+              <div className="path-dot"></div>
+              <div className="card-text">
+                <strong>Visual Lesson</strong>
+              </div>
+            </div>
+            <div className="path-step locked">
+              <div className="path-dot">🎯</div>
+              <div className="card-text">
+                <strong>Goal Met</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const MultimodalInspo = () => {
+  const [mode, setMode] = useState<'chat' | 'visual'>('chat');
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setMode(prev => prev === 'chat' ? 'visual' : 'chat');
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="morphing-panel-wrapper">
+      <div className="morphing-panel-header">
+        <div className="dots">
+          <span></span><span></span><span></span>
+        </div>
+        <div>
+          <span className={`mode-badge ${mode === 'chat' ? 'chat-mode' : 'visual-mode'}`}>
+            {mode === 'chat' ? 'Chat Interface' : 'Visual Lesson'}
+          </span>
+        </div>
+      </div>
+
+      <div className="morphing-content-container">
+        <AnimatePresence mode="wait">
+          {mode === 'chat' ? (
+            <motion.div
+              key="chat"
+              className="morphing-state"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              transition={{ duration: 0.35 }}
+              style={{ justifyContent: 'space-between' }}
+            >
+              <div className="chat-messages-container" style={{ justifyContent: 'center' }}>
+                <motion.div
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 }}
+                  className="chat-bubble ai"
+                >
+                  Let's explore wave compression. Ready?
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  className="chat-bubble user"
+                >
+                  Yes, show me a visual model!
+                </motion.div>
+              </div>
+
+              <div className="chat-input-bar">
+                <div className="chat-input-field">
+                  <span>Type a response...</span>
+                </div>
+                <div className="chat-send-btn">
+                  <ArrowRight size={14} />
+                </div>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="visual"
+              className="morphing-state"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              transition={{ duration: 0.35 }}
+              style={{ justifyContent: 'space-between' }}
+            >
+              <div className="visual-video-screen voice-session-active" style={{ flexGrow: 1 }}>
+                {/* Voice Call Floating Header Mini */}
+                <div className="voice-call-status-mini">
+                  <span className="voice-indicator-dot-pulsing"></span>
+                  <span>VOICE SESSION ACTIVE</span>
+                </div>
+
+                {/* Main Dynamic doppler diagram */}
+                <div className="visual-math-waves doppler-container-gradient" style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}>
+                  <div className="visual-physics-dot neon-pulsing-source" />
+                  <div className="doppler-wave-ring gradient-wave-1"></div>
+                  <div className="doppler-wave-ring gradient-wave-2"></div>
+                  <div className="doppler-wave-ring gradient-wave-3"></div>
+                </div>
+
+                {/* Subtitle / Voice Transcript Overlay Mini */}
+                <div className="voice-transcript-mini">
+                  <span>Lucid: "Move the source velocity to hear the pitch shift in real-time."</span>
+                </div>
+              </div>
+
+              <div className="visual-media-controls" style={{ paddingTop: '12px' }}>
+                <div className="controls-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div className="timeline-slider-bar" style={{ height: '4px', flexGrow: 1 }}>
+                    <div className="timeline-slider-fill" style={{ animationDuration: '6s' }}></div>
+                  </div>
+                  
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '16px' }}>
+                    <span style={{ fontSize: '10px', fontFamily: 'monospace', color: 'var(--text-muted)' }}>0:08 / 1:30</span>
+                    
+                    {/* Tiny pulsing voice wave bars */}
+                    <div className="tiny-wave-indicator">
+                      <span className="wave-bar bar-1"></span>
+                      <span className="wave-bar bar-2"></span>
+                      <span className="wave-bar bar-3"></span>
+                      <span className="wave-bar bar-4"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
+const MasteryVisualizer = () => {
+  const [callDuration, setCallDuration] = useState('04:12');
+
+  // Simple call timer counting up
+  useEffect(() => {
+    let seconds = 252; // 4 minutes and 12 seconds
+    const interval = setInterval(() => {
+      seconds += 1;
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      setCallDuration(`${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="voice-call-app-window">
+      {/* FaceTime-style Video Feed Container */}
+      <div className="voice-call-feed-container">
+        
+        {/* Floating Call Status HUD */}
+        <div className="call-hud-header">
+          <div className="hud-left">
+            <span className="live-badge-pulse"></span>
+            <span className="live-badge-text">LIVE SESSION</span>
+          </div>
+          <div className="hud-center">
+            <span className="hud-topic-title">Lucid: Doppler Effect</span>
+          </div>
+          <div className="hud-right">
+            <span className="hud-timer">{callDuration}</span>
+          </div>
+        </div>
+
+        {/* Kinetic Typography Breakthrough Visual */}
+        <div className="kinetic-motion-canvas">
+          {/* Liquid background gradient mesh */}
+          <div className="kinetic-bg-mesh"></div>
+          
+          {/* Animated dust particles floating in background */}
+          <div className="kinetic-particle p1"></div>
+          <div className="kinetic-particle p2"></div>
+          <div className="kinetic-particle p3"></div>
+          <div className="kinetic-particle p4"></div>
+          <div className="kinetic-particle p5"></div>
+
+          {/* Row 1: Suddenly, it all clicked. */}
+          <div className="kinetic-word-row row-1">
+            <span className="kinetic-word accent-green delay-1">Suddenly,</span>
+            <span className="kinetic-word delay-2">it</span>
+            <span className="kinetic-word delay-3">all</span>
+            <span className="kinetic-word accent-purple delay-4">clicked.</span>
+          </div>
+
+          {/* Row 2: I'm glad you understand! */}
+          <div className="kinetic-word-row row-2">
+            <span className="kinetic-word delay-5">"I'm</span>
+            <span className="kinetic-word delay-6">glad</span>
+            <span className="kinetic-word delay-7">you</span>
+            <span className="kinetic-word accent-green delay-8">understand!"</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const HeroBackground = () => (
   <div className="hero-bg-container">
     <svg viewBox="0 0 1440 1600" preserveAspectRatio="xMidYMin slice" className="hero-svg-bg">
@@ -450,15 +707,16 @@ export const Home = () => {
         </section>
       </div>
 
-      {/* Method Section Integrated */}
-      <section className="value-prop">
+      {/* How Lucid Helps Your Learning Section */}
+      <section className="lucid-inspo-section">
         <div className="section-title">
           <motion.h2
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800 }}
           >
-            The Knowledge Engine
+            How Lucid guides your learning
           </motion.h2>
           <motion.p
             initial={{ y: 20, opacity: 0 }}
@@ -466,71 +724,82 @@ export const Home = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            Passive video lectures are obsolete. Lucid is an active learning engine that deconstructs complexity.
+            Passive lectures are obsolete. Lucid adaptively maps, visualizes, and personalizes your learning curve.
           </motion.p>
         </div>
 
-        <div className="bento-grid">
+        <div className="lucid-inspo-grid">
+          {/* Card 1: Cognitive Tracking */}
           <motion.div
-            className="bento-card"
+            className="lucid-inspo-card-left"
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="card-intro-content">
+              <h3>
+                Lucid <span className="badge-pill indigo-pill"><Brain size={12} strokeWidth={3} /> tracks</span> how you learn
+              </h3>
+              <p>
+                Lucid maps your knowledge graph in real-time. By tracking how you learn, your environment, and how you think, it builds the optimal path to reach your goals—whether to master a complex subject or ace your exams.
+              </p>
+            </div>
+            
+            <CognitiveTracker />
+          </motion.div>
+
+          {/* Card 2: Multimodal Morphing */}
+          <motion.div
+            className="lucid-inspo-card-right"
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            <div className="card-intro-content">
+              <h3>
+                Learn <span className="badge-pill grey-pill"><Layers size={12} strokeWidth={3} /> the way</span> you want
+              </h3>
+              <p>
+                Switch seamlessly between rich text conversations with an active AI tutor and fully interactive visual lessons. Watch the UI transform instantly on the fly to fit your cognitive style.
+              </p>
+            </div>
+
+            <MultimodalInspo />
+          </motion.div>
+        </div>
+      </section>
+      {/* Instant Understanding Section (Cluely outcome inspired) */}
+      <section className="instant-understanding-section">
+        <div className="section-title">
+          <motion.h2
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
+            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800 }}
           >
-            <div className="card-icon"><Brain size={32} color="#00F6BB" /></div>
-            <h3>Hyper-Personalization</h3>
-            <p>Lucid detects exactly what you don't understand and rewrites the lesson in real-time to bridge the gap. It's not just a different explanation; it's a different curriculum generated on the fly.</p>
-            <div className="card-visual visual-graph"></div>
-          </motion.div>
-
-          <motion.div
-            className="bento-card"
+            Instant understanding
+          </motion.h2>
+          <motion.p
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            <div className="card-icon"><MessageSquare size={32} color="#7C3AED" /></div>
-            <h3>Socratic Dialogue</h3>
-            <p>It doesn't just lecture. It asks questions, challenges assumptions, and ensures you actually get it.</p>
-          </motion.div>
-
-          <motion.div
-            className="bento-card"
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <div className="card-icon"><Layers size={32} color="#06B6D4" /></div>
-            <h3>Multimodal</h3>
-            <p>Switch instantly between text, voice, and interactive visuals to match your learning style.</p>
-          </motion.div>
-
-          <motion.div
-            className="bento-card"
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <div className="card-icon"><Target size={32} color="#F43F5E" /></div>
-            <h3>Gap Analysis</h3>
-            <p>We map your knowledge graph and identify missing prerequisites before you even realize you're stuck.</p>
-          </motion.div>
-
-          <motion.div
-            className="bento-card"
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
-            <div className="card-icon"><Zap size={32} color="#EAB308" /></div>
-            <h3>Instant Interactive Models</h3>
-            <p>Don't imagine the physics. Play with it. Lucid generates interactive simulations (sliders, graphs, 3D objects) alongside the explanation so you can test your intuition immediately.</p>
-          </motion.div>
+            The fastest path from complex confusion to total concept mastery.
+          </motion.p>
         </div>
+
+        <motion.div
+          className="mastery-outer-frame"
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <MasteryVisualizer />
+        </motion.div>
       </section>
 
       <section className="explore-teaser">
