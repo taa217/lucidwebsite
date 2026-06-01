@@ -2777,4 +2777,121 @@ body {
   100% { transform: translateY(-160px) translateX(20px); opacity: 0; }
 }
 
+/* ── Mobile Layout Optimization for Lucid Inspo & Instant Understanding Sections ── */
+@media (max-width: 768px) {
+  /* Remove outer frame double padding & box backgrounds so elements expand fully */
+  .mastery-outer-frame {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    margin-top: 24px !important;
+  }
+  
+  .voice-call-app-window {
+    aspect-ratio: auto !important; /* Allow natural height flow */
+    min-height: 240px;
+    border-radius: 16px !important;
+  }
+  
+  .voice-call-feed-container {
+    padding: 20px 16px !important;
+    height: auto !important;
+    min-height: 240px;
+    justify-content: center;
+  }
+
+  .call-hud-header {
+    margin-bottom: 24px;
+  }
+  
+  /* Hide middle HUD badge to prevent overcrowding */
+  .hud-center {
+    display: none !important;
+  }
+  
+  /* Optimize kinetic text for small widths */
+  .kinetic-motion-canvas {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 32px 0;
+    width: 100%;
+  }
+  
+  .kinetic-word-row {
+    gap: 8px !important;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .kinetic-word {
+    font-size: clamp(16px, 5.5vw, 24px) !important;
+  }
+  
+  /* Staggered row margins */
+  .kinetic-word-row.row-1 {
+    margin-bottom: 6px !important;
+  }
+  
+  /* Tighten visualizer cards */
+  .lucid-inspo-card-left,
+  .lucid-inspo-card-right {
+    min-height: auto !important;
+    height: auto !important;
+    padding: 20px 16px !important;
+  }
+  
+  /* Vertical visualizer flow */
+  .visualizer-flow {
+    flex-direction: column !important;
+    gap: 16px !important;
+    align-items: stretch !important;
+  }
+  
+  .flow-step {
+    width: 100% !important;
+  }
+  
+  .flow-connector {
+    flex-direction: row !important;
+    min-width: auto !important;
+    height: 32px !important;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 0;
+    margin: 8px 0;
+  }
+  
+  .connector-line {
+    width: 2px !important;
+    height: 100% !important;
+    background: linear-gradient(180deg, rgba(255,255,255,0.05), var(--primary), rgba(255,255,255,0.05)) !important;
+  }
+  
+  .glowing-pulse {
+    width: 100% !important;
+    height: 10px !important;
+    left: 0 !important;
+    top: -10px !important;
+    animation: pulseMoveVertical 2s linear infinite !important;
+  }
+  
+  .connector-text {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(12px) !important;
+    white-space: nowrap !important;
+    font-size: 8px !important;
+    display: inline-block !important;
+  }
+}
+
+@keyframes pulseMoveVertical {
+  0% { top: -10px; }
+  100% { top: 100%; }
+}
+
 
