@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Instagram, Twitter, Facebook, Linkedin } from 'lucide-react';
 import './App.css';
 import { Navbar } from './components/layout/Navbar';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsOfService } from './pages/TermsOfService';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -13,6 +15,11 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/terms-and-conditions" element={<TermsOfService />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
@@ -61,8 +68,13 @@ function App() {
             </div>
             <div>
               <h4>Product</h4>
-              <a href="/">Home</a>
+              <Link to="/">Home</Link>
               <a href="https://app.lucid-ai.co">Get Started</a>
+            </div>
+            <div>
+              <h4>Legal</h4>
+              <Link to="/privacy">Privacy Policy</Link>
+              <Link to="/terms">Terms & Conditions</Link>
             </div>
           </div>
           <p className="footer-bottom">© {new Date().getFullYear()} Lucid AI. Designed for learners everywhere.</p>
