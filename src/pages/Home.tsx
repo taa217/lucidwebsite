@@ -22,43 +22,10 @@ import {
 import { CourseworkShowcase } from '../components/CourseworkShowcase';
 
 const HeroBackground = () => (
-  <div className="hero-bg-container">
-    <svg viewBox="0 0 1440 1600" preserveAspectRatio="xMidYMin slice" className="hero-svg-bg">
-      <defs>
-        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="650" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="var(--sky-top, #0a1930)" />
-          <stop offset="60%" stopColor="var(--sky-mid, #112d5e)" />
-          <stop offset="100%" stopColor="var(--sky-bottom, #00f6bb)" />
-        </linearGradient>
-        <linearGradient id="mountainGrad1" x1="0" y1="100" x2="0" y2="650" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="var(--mountain-top, #0d2247)" />
-          <stop offset="100%" stopColor="var(--mountain-bottom, #050d1c)" />
-        </linearGradient>
-        <linearGradient id="mountainGrad2" x1="0" y1="250" x2="0" y2="650" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="var(--mountain-front-top, #05112b)" />
-          <stop offset="100%" stopColor="var(--mountain-front-bottom, #020613)" />
-        </linearGradient>
-        <linearGradient id="streamGrad1" x1="0" y1="300" x2="0" y2="1400" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.8" />
-          <stop offset="50%" stopColor="var(--primary)" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
-        </linearGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="30" result="coloredBlur" />
-          <feMerge>
-            <feMergeNode in="coloredBlur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-
-      <rect width="1440" height="1600" fill="url(#skyGrad)" opacity="0.85" />
-      <circle cx="1100" cy="400" r="140" fill="var(--primary)" filter="url(#glow)" opacity="0.35" />
-      <circle cx="1100" cy="400" r="80" fill="#fff" filter="url(#glow)" opacity="0.85" />
-      <path d="M0 350 L250 200 L500 330 L800 100 L1150 350 L1440 200 L1440 1600 L0 1600 Z" fill="url(#mountainGrad1)" opacity="0.85" />
-      <path d="M0 500 L350 300 L700 500 L1050 250 L1440 450 L1440 1600 L0 1600 Z" fill="url(#mountainGrad2)" />
-      <path d="M350 300 Q 250 600 400 900 T 200 1400" fill="none" stroke="url(#streamGrad1)" strokeWidth="3" opacity="0.6" />
-    </svg>
+  <div className="hero-bg-container" aria-hidden="true">
+    <div className="hero-ambient-aura top-aura" />
+    <div className="hero-ambient-aura accent-aura" />
+    <div className="hero-subtle-grid" />
     <div className="hero-bg-overlay" />
   </div>
 );
