@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   CheckCircle2,
@@ -19,23 +19,8 @@ type ShowcaseTab = 'feed' | 'studio' | 'rubric';
 
 export const CourseworkShowcase: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ShowcaseTab>('studio');
-  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true);
-
-  // Auto-cycle through tabs if user hasn't manually interacted
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    const tabs: ShowcaseTab[] = ['feed', 'studio', 'rubric'];
-    const timer = setInterval(() => {
-      setActiveTab((current) => {
-        const nextIndex = (tabs.indexOf(current) + 1) % tabs.length;
-        return tabs[nextIndex];
-      });
-    }, 8000);
-    return () => clearInterval(timer);
-  }, [isAutoPlaying]);
 
   const handleTabClick = (tab: ShowcaseTab) => {
-    setIsAutoPlaying(false);
     setActiveTab(tab);
   };
 
