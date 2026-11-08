@@ -58,7 +58,7 @@ function App() {
               <div className="logo-container small">
                 <span>Lucid</span>
               </div>
-              <p className="footer-tagline">Personalized, interactive learning for ambitious students.</p>
+              <p className="footer-tagline">The autonomous coursework & assignment engine for ambitious students.</p>
               <div className="footer-socials">
                 <a href="https://instagram.com/lucidai_company" aria-label="Instagram"><Instagram size={18} /></a>
                 <a href="https://x.com/lucid_startup" aria-label="Twitter"><Twitter size={18} /></a>
