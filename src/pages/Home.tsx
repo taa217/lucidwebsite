@@ -106,7 +106,7 @@ export const Home = () => {
                 transition={{ delay: 0.3, duration: 0.8 }}
               >
                 Your Coursework & Assignments. <br />
-                <span className="headline-gradient">Done in Minutes.</span>
+                <span className="headline-gradient">Reclaim Your Freedom.</span>
               </motion.h1>
 
               {/* Subheadline (StoryBrand Guide Positioning) */}
@@ -187,26 +187,6 @@ export const Home = () => {
                   className="freedom-photo"
                 />
                 <div className="freedom-photo-overlay" />
-
-                {/* Floating Micro-Badge Top Right */}
-                <div className="floating-badge badge-top-right">
-                  <span className="live-sparkle-dot" />
-                  <div className="badge-text-group">
-                    <span className="badge-title">Coursework Done</span>
-                    <span className="badge-sub">4:12 PM • All submissions in</span>
-                  </div>
-                </div>
-
-                {/* Floating Micro-Badge Bottom Left */}
-                <div className="floating-badge badge-bottom-left">
-                  <div className="badge-icon-check">
-                    <CheckCircle2 size={16} />
-                  </div>
-                  <div className="badge-text-group">
-                    <span className="badge-title">Canvas Queue Cleared</span>
-                    <span className="badge-sub">Rubric Grade: A (99.4%)</span>
-                  </div>
-                </div>
               </div>
             </motion.div>
           </div>
