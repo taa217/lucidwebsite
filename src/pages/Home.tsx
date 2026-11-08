@@ -573,7 +573,7 @@ export const Home = () => {
             <div className="testimonial-card">
               <div className="testimonial-stars">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={15} fill="#00F6BB" color="#00F6BB" />
+                  <Star key={i} size={15} fill="#FBBF24" color="#FBBF24" />
                 ))}
               </div>
               <p className="testimonial-quote">
@@ -593,7 +593,7 @@ export const Home = () => {
             <div className="testimonial-card">
               <div className="testimonial-stars">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={15} fill="#00F6BB" color="#00F6BB" />
+                  <Star key={i} size={15} fill="#FBBF24" color="#FBBF24" />
                 ))}
               </div>
               <p className="testimonial-quote">
@@ -613,7 +613,7 @@ export const Home = () => {
             <div className="testimonial-card">
               <div className="testimonial-stars">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={15} fill="#00F6BB" color="#00F6BB" />
+                  <Star key={i} size={15} fill="#FBBF24" color="#FBBF24" />
                 ))}
               </div>
               <p className="testimonial-quote">
