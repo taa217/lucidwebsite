@@ -105,8 +105,8 @@ export const Home = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
               >
-                Your Coursework & Assignments. <br />
-                <span className="headline-gradient">Reclaim Your Freedom.</span>
+                Your Assignments, Done. <br />
+                <span className="headline-gradient">Your Freedom, Reclaimed.</span>
               </motion.h1>
 
               {/* Subheadline (StoryBrand Guide Positioning) */}
@@ -211,7 +211,7 @@ export const Home = () => {
             <span className="text-highlight-danger">11:59 PM panic attack.</span>
           </h2>
           <p className="section-description">
-            You enrolled to master your field and build your future—not to sacrifice your health,
+            You enrolled just to graduate—not to sacrifice your health,
             sleep, and weekends formatting bibliographies and solving repetitive busywork.
           </p>
 
