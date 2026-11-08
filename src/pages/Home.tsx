@@ -86,17 +86,16 @@ export const Home = () => {
         <section className="hero-impressive cluely-style-hero">
           <div className="hero-split-container">
             <div className="hero-content-wrapper">
-              {/* Eyebrow Pill */}
+              {/* Eyebrow Label */}
               <motion.div
-                className="hero-badge-pill"
-                initial={{ y: 20, opacity: 0 }}
+                className="hero-category-label"
+                initial={{ y: 15, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
               >
-                <Sparkles size={14} className="accent-sparkle" />
                 <span>The AI Coursework & Assignment Solver</span>
-                <span className="pill-divider">•</span>
-                <span className="pill-highlight">Canvas & Classroom Synced</span>
+                <span className="label-sep">/</span>
+                <span className="label-highlight">Canvas & Classroom Synced</span>
               </motion.div>
 
               {/* Main Headline */}
@@ -208,11 +207,6 @@ export const Home = () => {
                     <span className="badge-sub">Rubric Grade: A (99.4%)</span>
                   </div>
                 </div>
-
-                {/* Floating Pill Bottom Right */}
-                <div className="floating-pill-free">
-                  <span>☕ Weekend Reclaimed</span>
-                </div>
               </div>
             </motion.div>
           </div>
@@ -232,11 +226,6 @@ export const Home = () => {
           ────────────────────────────────────────────────── */}
       <section className="storybrand-section problem-section" id="problem">
         <div className="section-container">
-          <div className="section-header-pill">
-            <AlertTriangle size={14} />
-            <span>THE REALITY OF COLLEGE</span>
-          </div>
-
           <h2 className="section-main-heading">
             College shouldn’t feel like an endless <br />
             <span className="text-highlight-danger">11:59 PM panic attack.</span>
@@ -288,11 +277,6 @@ export const Home = () => {
           ────────────────────────────────────────────────── */}
       <section className="storybrand-section how-it-works-section" id="how-it-works">
         <div className="section-container">
-          <div className="section-header-pill">
-            <Sparkles size={14} />
-            <span>THE 3-STEP PLAN</span>
-          </div>
-
           <h2 className="section-main-heading">
             From assignment prompt to ready-to-submit <br />
             in 3 simple steps.
@@ -362,11 +346,6 @@ export const Home = () => {
           ────────────────────────────────────────────────── */}
       <section className="storybrand-section features-section" id="features">
         <div className="section-container">
-          <div className="section-header-pill">
-            <Zap size={14} />
-            <span>BUILT FOR SERIOUS COURSEWORK</span>
-          </div>
-
           <h2 className="section-main-heading">
             Engineered to handle real syllabi, <br />
             not just generic chat prompts.
@@ -479,11 +458,6 @@ export const Home = () => {
           ────────────────────────────────────────────────── */}
       <section className="storybrand-section transformation-section" id="comparison">
         <div className="section-container">
-          <div className="section-header-pill">
-            <GraduationCap size={14} />
-            <span>THE TRANSFORMATION</span>
-          </div>
-
           <h2 className="section-main-heading">
             Reclaim 15+ hours every single week.
           </h2>
@@ -560,11 +534,6 @@ export const Home = () => {
           ────────────────────────────────────────────────── */}
       <section className="storybrand-section testimonials-section">
         <div className="section-container">
-          <div className="section-header-pill">
-            <Star size={14} />
-            <span>STUDENT REVIEWS</span>
-          </div>
-
           <h2 className="section-main-heading">
             Loved by students at top universities.
           </h2>
@@ -637,11 +606,6 @@ export const Home = () => {
           ────────────────────────────────────────────────── */}
       <section className="storybrand-section faq-section" id="faq">
         <div className="section-container">
-          <div className="section-header-pill">
-            <BookOpen size={14} />
-            <span>FREQUENTLY ASKED QUESTIONS</span>
-          </div>
-
           <h2 className="section-main-heading">
             Got questions? We've got answers.
           </h2>
@@ -684,10 +648,6 @@ export const Home = () => {
           ────────────────────────────────────────────────── */}
       <section className="explore-teaser">
         <div className="cta-content">
-          <div className="cta-badge">
-            <Zap size={14} fill="currentColor" />
-            <span>ZERO STRESS • INSTANT RESULTS</span>
-          </div>
           <h2>Stop dreading 11:59 PM. Start finishing your coursework tonight.</h2>
           <p className="cta-sub">
             Join thousands of students who submit on time, boost their GPA, and reclaim their weekends.
