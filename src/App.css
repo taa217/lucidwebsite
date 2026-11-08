@@ -4410,3 +4410,241 @@ body {
   border-radius: 999px;
   margin-bottom: 20px;
 }
+
+/* ==========================================================================
+   HERO SPLIT LAYOUT & STUDENT FREEDOM CARD
+   ========================================================================== */
+
+.hero-split-container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 50px;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 1081px) {
+  .hero-content-wrapper {
+    text-align: left;
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .hero-headline-split {
+    text-align: left;
+    font-size: clamp(40px, 4.5vw, 68px);
+  }
+
+  .hero-sub-split {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .hero-ctas-split {
+    justify-content: flex-start;
+  }
+
+  .hero-proof-split {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 1080px) {
+  .hero-split-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 48px;
+  }
+
+  .hero-content-wrapper {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-headline-split {
+    text-align: center;
+  }
+
+  .hero-sub-split {
+    text-align: center;
+    margin: 0 auto 36px;
+  }
+
+  .hero-ctas-split {
+    justify-content: center;
+  }
+
+  .hero-proof-split {
+    justify-content: center;
+  }
+
+  .hero-visual-card-side {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+.hero-visual-card-side {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.freedom-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 4 / 3.4;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 30px 70px -15px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  background: #060e22;
+}
+
+.freedom-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.freedom-image-wrapper:hover .freedom-photo {
+  transform: scale(1.03);
+}
+
+.freedom-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 14, 34, 0.05) 0%, rgba(6, 14, 34, 0.65) 100%);
+  pointer-events: none;
+}
+
+/* Floating Micro-Badges on Image */
+.floating-badge {
+  position: absolute;
+  background: rgba(6, 14, 34, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 10px 14px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  z-index: 5;
+  transition: transform 0.25s ease;
+}
+
+.floating-badge:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 246, 187, 0.4);
+}
+
+.badge-top-right {
+  top: 18px;
+  right: 18px;
+  animation: floatSlow 6s ease-in-out infinite alternate;
+}
+
+.badge-bottom-left {
+  bottom: 18px;
+  left: 18px;
+  animation: floatSlow 6s ease-in-out infinite 3s alternate;
+}
+
+.badge-text-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.badge-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.badge-sub {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.badge-icon-check {
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.live-sparkle-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+  animation: blink 1.6s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+.floating-pill-free {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  background: rgba(0, 246, 187, 0.18);
+  border: 1px solid rgba(0, 246, 187, 0.4);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 5;
+}
+
+@keyframes floatSlow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (max-width: 600px) {
+  .freedom-image-wrapper {
+    aspect-ratio: 16 / 10;
+  }
+
+  .floating-badge {
+    padding: 8px 10px;
+  }
+
+  .badge-title {
+    font-size: 11px;
+  }
+
+  .badge-sub {
+    font-size: 9.5px;
+  }
+
+  .floating-pill-free {
+    display: none;
+  }
+}

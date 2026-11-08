@@ -117,91 +117,135 @@ export const Home = () => {
         <HeroBackground />
 
         <section className="hero-impressive cluely-style-hero">
-          <div className="hero-content-wrapper">
-            {/* Eyebrow Pill */}
-            <motion.div
-              className="hero-badge-pill"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              <Sparkles size={14} className="accent-sparkle" />
-              <span>The AI Coursework & Assignment Solver</span>
-              <span className="pill-divider">•</span>
-              <span className="pill-highlight">Canvas & Classroom Synced</span>
-            </motion.div>
-
-            {/* Main Headline */}
-            <motion.h1
-              className="mega-headline cluely-headline"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            >
-              Your Coursework & Assignments. <br />
-              <span className="headline-gradient">Done in Minutes.</span>
-            </motion.h1>
-
-            {/* Subheadline (StoryBrand Guide Positioning) */}
-            <motion.p
-              className="hero-sub cluely-sub"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              Lucid connects directly to Canvas and Google Classroom, analyzes your course
-              materials, and writes complete, verified solutions tailored to your professor’s exact
-              grading rubric.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div
-              className="hero-ctas cluely-ctas"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              <a
-                href="https://app.lucid-ai.co"
-                className="btn-glow cluely-main-btn"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  textDecoration: 'none',
-                  borderRadius: '50px'
-                }}
+          <div className="hero-split-container">
+            <div className="hero-content-wrapper">
+              {/* Eyebrow Pill */}
+              <motion.div
+                className="hero-badge-pill"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
               >
-                <Zap size={20} fill="currentColor" />
-                <span>Start Solving Free</span>
-                <ArrowRight size={18} />
-              </a>
+                <Sparkles size={14} className="accent-sparkle" />
+                <span>The AI Coursework & Assignment Solver</span>
+                <span className="pill-divider">•</span>
+                <span className="pill-highlight">Canvas & Classroom Synced</span>
+              </motion.div>
 
-              <a href="#how-it-works" className="btn-secondary-hero">
-                <span>See How It Works</span>
-              </a>
-            </motion.div>
+              {/* Main Headline */}
+              <motion.h1
+                className="mega-headline cluely-headline hero-headline-split"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              >
+                Your Coursework & Assignments. <br />
+                <span className="headline-gradient">Done in Minutes.</span>
+              </motion.h1>
 
-            {/* Micro Trust Stats */}
+              {/* Subheadline (StoryBrand Guide Positioning) */}
+              <motion.p
+                className="hero-sub cluely-sub hero-sub-split"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+              >
+                Lucid connects directly to Canvas and Google Classroom, analyzes your course
+                materials, and writes complete, verified solutions tailored to your professor’s exact
+                grading rubric.
+              </motion.p>
+
+              {/* CTAs */}
+              <motion.div
+                className="hero-ctas cluely-ctas hero-ctas-split"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <a
+                  href="https://app.lucid-ai.co"
+                  className="btn-glow cluely-main-btn"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    textDecoration: 'none',
+                    borderRadius: '50px'
+                  }}
+                >
+                  <Zap size={20} fill="currentColor" />
+                  <span>Start Solving Free</span>
+                  <ArrowRight size={18} />
+                </a>
+
+                <a href="#how-it-works" className="btn-secondary-hero">
+                  <span>See How It Works</span>
+                </a>
+              </motion.div>
+
+              {/* Micro Trust Stats */}
+              <motion.div
+                className="hero-social-proof hero-proof-split"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
+                <div className="proof-item">
+                  <CheckCircle2 size={15} className="proof-icon" />
+                  <span>4,200+ Assignments Solved this Week</span>
+                </div>
+                <div className="proof-dot">•</div>
+                <div className="proof-item">
+                  <ShieldCheck size={15} className="proof-icon" />
+                  <span>100% Confidential & Secure</span>
+                </div>
+                <div className="proof-dot">•</div>
+                <div className="proof-item">
+                  <Star size={15} className="proof-icon" />
+                  <span>99.4% Rubric Alignment</span>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right Side Visual: Free Students Card */}
             <motion.div
-              className="hero-social-proof"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6 }}
+              className="hero-visual-card-side"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="proof-item">
-                <CheckCircle2 size={15} className="proof-icon" />
-                <span>4,200+ Assignments Solved this Week</span>
-              </div>
-              <div className="proof-dot">•</div>
-              <div className="proof-item">
-                <ShieldCheck size={15} className="proof-icon" />
-                <span>100% Confidential & Secure</span>
-              </div>
-              <div className="proof-dot">•</div>
-              <div className="proof-item">
-                <Star size={15} className="proof-icon" />
-                <span>99.4% Rubric Alignment</span>
+              <div className="freedom-image-wrapper">
+                <img
+                  src={process.env.PUBLIC_URL + '/students-freedom.jpg'}
+                  alt="Happy, carefree university students relaxing on campus after finishing coursework"
+                  className="freedom-photo"
+                />
+                <div className="freedom-photo-overlay" />
+
+                {/* Floating Micro-Badge Top Right */}
+                <div className="floating-badge badge-top-right">
+                  <span className="live-sparkle-dot" />
+                  <div className="badge-text-group">
+                    <span className="badge-title">Coursework Done</span>
+                    <span className="badge-sub">4:12 PM • All submissions in</span>
+                  </div>
+                </div>
+
+                {/* Floating Micro-Badge Bottom Left */}
+                <div className="floating-badge badge-bottom-left">
+                  <div className="badge-icon-check">
+                    <CheckCircle2 size={16} />
+                  </div>
+                  <div className="badge-text-group">
+                    <span className="badge-title">Canvas Queue Cleared</span>
+                    <span className="badge-sub">Rubric Grade: A (99.4%)</span>
+                  </div>
+                </div>
+
+                {/* Floating Pill Bottom Right */}
+                <div className="floating-pill-free">
+                  <span>☕ Weekend Reclaimed</span>
+                </div>
               </div>
             </motion.div>
           </div>
