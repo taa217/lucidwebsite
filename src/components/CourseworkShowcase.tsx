@@ -11,7 +11,6 @@ import {
   Check,
   FileCheck,
   Cpu,
-  Layers,
   GraduationCap
 } from 'lucide-react';
 
@@ -35,29 +34,34 @@ export const CourseworkShowcase: React.FC = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="showcase-tabs">
+        <div className="showcase-tabs" role="tablist" aria-label="Lucid workflow steps">
           <button
             type="button"
+            role="tab"
+            aria-selected={activeTab === 'feed'}
             className={`showcase-tab ${activeTab === 'feed' ? 'active' : ''}`}
             onClick={() => handleTabClick('feed')}
           >
             <BookOpen size={14} />
-            <span>1. Canvas Task Queue</span>
-            <span className="tab-pill-badge">3 Due</span>
+            <span>1. Task Queue</span>
+            <span className="tab-pill-badge">3</span>
           </button>
 
           <button
             type="button"
+            role="tab"
+            aria-selected={activeTab === 'studio'}
             className={`showcase-tab ${activeTab === 'studio' ? 'active' : ''}`}
             onClick={() => handleTabClick('studio')}
           >
             <Cpu size={14} />
-            <span>2. CoPilot Solver Studio</span>
-            <span className="tab-pill-badge active-live">Live</span>
+            <span>2. Solver Studio</span>
           </button>
 
           <button
             type="button"
+            role="tab"
+            aria-selected={activeTab === 'rubric'}
             className={`showcase-tab ${activeTab === 'rubric' ? 'active' : ''}`}
             onClick={() => handleTabClick('rubric')}
           >
@@ -106,7 +110,7 @@ export const CourseworkShowcase: React.FC = () => {
                       <Clock size={12} /> Due Tonight @ 11:59 PM
                     </span>
                   </div>
-                  <h5 className="assignment-name">Macroeconomic Equilibrium & Fiscal Multipliers</h5>
+                  <h5 className="assignment-name">Problem Set 4: Mathematical Equilibrium & Shift Analysis</h5>
                   <p className="assignment-snippet">
                     Derive the IS-LM shifts under an unexpected monetary expansion. Reference Chapter 8 lecture slides and calculate the output gap.
                   </p>
@@ -120,7 +124,7 @@ export const CourseworkShowcase: React.FC = () => {
                       className="solve-btn-mini"
                       onClick={() => handleTabClick('studio')}
                     >
-                      <span>Auto-Solve with Lucid</span>
+                      <span>Open in Solver Studio</span>
                       <ArrowRight size={13} />
                     </button>
                   </div>
@@ -173,17 +177,13 @@ export const CourseworkShowcase: React.FC = () => {
             >
               <div className="studio-top-info">
                 <div className="studio-task-header">
-                  <span className="course-badge">ECON 201 • Assignment #4</span>
-                  <span className="model-chip">
-                    <Sparkles size={12} /> Claude 3.5 Sonnet
-                  </span>
-                  <span className="strategy-chip">
-                    <Layers size={12} /> Strategy: Stepwise & Rigorous
-                  </span>
+                  <span className="course-badge">ECON 201</span>
+                  <span className="studio-assignment-ref">Problem Set 4</span>
                 </div>
-                <div className="studio-audit-pill" onClick={() => handleTabClick('rubric')}>
-                  <CheckCircle2 size={13} className="check-green" />
-                  <span>Rubric Matched (100%)</span>
+                <div className="studio-meta-right">
+                  <span className="model-chip">
+                    <Sparkles size={12} /> Claude 3.5 Sonnet · Stepwise
+                  </span>
                 </div>
               </div>
 
@@ -191,43 +191,40 @@ export const CourseworkShowcase: React.FC = () => {
                 {/* Document Canvas Content */}
                 <div className="workspace-document">
                   <div className="doc-header">
-                    <h3 className="doc-title">Problem Set 4: Mathematical Equilibrium & Shift Analysis</h3>
-                    <div className="doc-meta-tags">
-                      <span>Author: Student Submission</span>
-                      <span>Format: Academic Markdown + Equations</span>
-                      <span>References: Lecture Slides 8 & Textbook Ch. 12</span>
-                    </div>
+                    <h3 className="doc-title">Mathematical Equilibrium & Shift Analysis</h3>
+                    <p className="doc-subtitle">
+                      Grounded in Professor Chen’s Lecture 8 (Slide 14) &amp; Mankiw Ch. 12
+                    </p>
                   </div>
 
                   <div className="doc-body-content">
                     <div className="solution-section">
                       <h4 className="section-heading">1. General Equilibrium Formulation</h4>
                       <p className="doc-p">
-                        From the goods market equilibrium condition, aggregate demand must equal total output <code className="math-code">Y</code>:
+                        From the goods market equilibrium condition, aggregate demand must equal total output <span className="math-inline">Y</span>:
                       </p>
                       <div className="math-block">
-                        <code>Y = C(Y - T) + I(r) + G &nbsp; where &nbsp; MPC = 0.75</code>
+                        <span className="math-expr">Y = C(Y − T) + I(r) + G</span>
+                        <span className="math-note">MPC = 0.75</span>
                       </div>
                       <p className="doc-p">
-                        Substituting the consumption function into aggregate output yields the fiscal multiplier equation:
+                        Substituting the consumption function into aggregate output yields the fiscal multiplier:
                       </p>
                       <div className="math-block">
-                        <code>ΔY / ΔG = 1 / (1 - MPC) = 1 / (1 - 0.75) = 4.0</code>
+                        <span className="math-expr">ΔY / ΔG = 1 / (1 − MPC) = 1 / (1 − 0.75) = 4.0</span>
                       </div>
                     </div>
 
                     <div className="solution-section">
-                      <h4 className="section-heading">2. Comparative Statics & Monetary Response</h4>
+                      <h4 className="section-heading">2. Comparative Statics &amp; Monetary Response</h4>
                       <p className="doc-p">
-                        When the central bank expands the real money supply by <code className="math-code">Δ(M/P) = +$50B</code>, the LM curve shifts downward and to the right. As derived in Professor Chen’s slide 14, the interest rate drops from <code className="math-code">r₀ = 4.5%</code> to <code className="math-code">r₁ = 3.2%</code>, stimulating investment demand by <code className="math-code">+$80B</code>.
+                        When the central bank expands the real money supply by <span className="math-inline">Δ(M/P) = +$50B</span>, the LM curve shifts downward and to the right. Per Lecture 8 (Slide 14), the interest rate falls from <span className="math-inline">r₀ = 4.5%</span> to <span className="math-inline">r₁ = 3.2%</span>, stimulating investment demand by <span className="math-inline">+$80B</span>.
                       </p>
                     </div>
 
                     <div className="solution-callout">
-                      <div className="callout-badge">
-                        <Check size={12} /> Rubric Criterion #3 Satisfied
-                      </div>
-                      <span>Every step verified with professor's exact parameter definitions and units.</span>
+                      <Check size={13} className="callout-icon" />
+                      <span>Criterion #3 verified — parameters, signs, and units match course rubric.</span>
                     </div>
                   </div>
                 </div>
@@ -237,12 +234,21 @@ export const CourseworkShowcase: React.FC = () => {
                   <div className="insight-card">
                     <div className="insight-title">
                       <GraduationCap size={14} />
-                      <span>Course Readings Ingested</span>
+                      <span>Course Readings Grounded</span>
                     </div>
                     <ul className="reading-list">
-                      <li>✓ Syllabus Section 4.2 (Rubric rules)</li>
-                      <li>✓ Lecture_08_ISLM.pdf (32 pages)</li>
-                      <li>✓ Mankiw_Macroeconomics_Ch12.pdf</li>
+                      <li>
+                        <span className="reading-name">Syllabus Sec. 4.2</span>
+                        <span className="reading-tag">Rubric</span>
+                      </li>
+                      <li>
+                        <span className="reading-name">Lecture 08: IS–LM</span>
+                        <span className="reading-tag">32 pp</span>
+                      </li>
+                      <li>
+                        <span className="reading-name">Mankiw Ch. 12</span>
+                        <span className="reading-tag">Text</span>
+                      </li>
                     </ul>
                   </div>
 
@@ -253,14 +259,19 @@ export const CourseworkShowcase: React.FC = () => {
                     </div>
                     <div className="audit-metrics">
                       <div className="metric-item">
-                        <span className="metric-num">0%</span>
-                        <span className="metric-lbl">Plagiarism</span>
+                        <span className="metric-num">100%</span>
+                        <span className="metric-lbl">Original</span>
                       </div>
                       <div className="metric-item">
                         <span className="metric-num">100%</span>
                         <span className="metric-lbl">Rubric Match</span>
                       </div>
                     </div>
+                    <ul className="audit-mini-checks">
+                      <li><Check size={12} /> Full IS–LM derivation</li>
+                      <li><Check size={12} /> Slide 14 &amp; Ch. 12 cited</li>
+                      <li><Check size={12} /> Units &amp; signs verified</li>
+                    </ul>
                     <button
                       type="button"
                       className="audit-inspect-btn"
