@@ -4,14 +4,11 @@ import {
   CheckCircle2,
   Clock,
   FileText,
-  Sparkles,
-  ShieldCheck,
   ArrowRight,
   BookOpen,
   Check,
   FileCheck,
-  Cpu,
-  GraduationCap
+  Sparkles
 } from 'lucide-react';
 
 type ShowcaseTab = 'feed' | 'studio' | 'rubric';
@@ -25,16 +22,16 @@ export const CourseworkShowcase: React.FC = () => {
 
   return (
     <div className="coursework-showcase-window">
-      {/* Top Application Bar */}
+      {/* Top Bar */}
       <div className="showcase-header">
-        <div className="showcase-dots">
+        <div className="showcase-dots" aria-hidden="true">
           <span className="dot dot-red" />
           <span className="dot dot-yellow" />
           <span className="dot dot-green" />
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="showcase-tabs" role="tablist" aria-label="Lucid workflow steps">
+        {/* Simple 3-Step Switcher */}
+        <div className="showcase-tabs" role="tablist" aria-label="How Lucid works">
           <button
             type="button"
             role="tab"
@@ -43,8 +40,7 @@ export const CourseworkShowcase: React.FC = () => {
             onClick={() => handleTabClick('feed')}
           >
             <BookOpen size={14} />
-            <span>1. Task Queue</span>
-            <span className="tab-pill-badge">3</span>
+            <span>1. Pick Assignment</span>
           </button>
 
           <button
@@ -54,8 +50,8 @@ export const CourseworkShowcase: React.FC = () => {
             className={`showcase-tab ${activeTab === 'studio' ? 'active' : ''}`}
             onClick={() => handleTabClick('studio')}
           >
-            <Cpu size={14} />
-            <span>2. Solver Studio</span>
+            <Sparkles size={14} />
+            <span>2. Lucid Solves It</span>
           </button>
 
           <button
@@ -66,7 +62,7 @@ export const CourseworkShowcase: React.FC = () => {
             onClick={() => handleTabClick('rubric')}
           >
             <FileCheck size={14} />
-            <span>3. Rubric Audit</span>
+            <span>3. Grade Check</span>
             <span className="tab-pill-badge score">100/100</span>
           </button>
         </div>
@@ -74,7 +70,7 @@ export const CourseworkShowcase: React.FC = () => {
         {/* Status Pill */}
         <div className="showcase-status">
           <span className="pulse-dot" />
-          <span className="status-label">LMS Synced</span>
+          <span className="status-label">Canvas Synced</span>
         </div>
       </div>
 
@@ -84,82 +80,79 @@ export const CourseworkShowcase: React.FC = () => {
           {activeTab === 'feed' && (
             <motion.div
               key="feed"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
               className="showcase-panel feed-panel"
             >
               <div className="panel-subhead">
                 <div>
-                  <h4 className="panel-title">Active Coursework Stream</h4>
-                  <p className="panel-desc">Directly synchronized with Canvas & Google Classroom</p>
+                  <h4 className="panel-title">Your Upcoming Assignments</h4>
+                  <p className="panel-desc">Automatically pulled from Canvas &amp; Google Classroom</p>
                 </div>
                 <div className="lms-badges">
-                  <span className="lms-tag canvas">Canvas LMS</span>
+                  <span className="lms-tag canvas">Canvas</span>
                   <span className="lms-tag gclassroom">Google Classroom</span>
                 </div>
               </div>
 
               <div className="assignment-cards-list">
-                {/* Task 1 */}
                 <div className="assignment-card active-item">
                   <div className="assignment-meta">
-                    <span className="course-code">ECON 201</span>
+                    <span className="course-code">PSYCH 101</span>
                     <span className="urgency-badge critical">
-                      <Clock size={12} /> Due Tonight @ 11:59 PM
+                      <Clock size={12} /> Due Tonight · 11:59 PM
                     </span>
                   </div>
-                  <h5 className="assignment-name">Problem Set 4: Mathematical Equilibrium & Shift Analysis</h5>
+                  <h5 className="assignment-name">Sleep &amp; Memory Response Paper</h5>
                   <p className="assignment-snippet">
-                    Derive the IS-LM shifts under an unexpected monetary expansion. Reference Chapter 8 lecture slides and calculate the output gap.
+                    Explain how deep sleep helps form long-term memories. Cite Lecture 6 slides and Textbook Chapter 4 (500 words).
                   </p>
                   <div className="assignment-footer">
                     <div className="attached-files">
                       <FileText size={12} />
-                      <span>Lecture_08_Slides.pdf (Attached)</span>
+                      <span>Lecture_06_Slides.pdf + Rubric attached</span>
                     </div>
                     <button
                       type="button"
                       className="solve-btn-mini"
                       onClick={() => handleTabClick('studio')}
                     >
-                      <span>Open in Solver Studio</span>
+                      <span>Solve with Lucid</span>
                       <ArrowRight size={13} />
                     </button>
                   </div>
                 </div>
 
-                {/* Task 2 */}
                 <div className="assignment-card">
                   <div className="assignment-meta">
-                    <span className="course-code">CHEM 241</span>
+                    <span className="course-code">BIO 104</span>
                     <span className="urgency-badge high">
-                      <Clock size={12} /> Due Tomorrow @ 5:00 PM
+                      <Clock size={12} /> Due Tomorrow · 5:00 PM
                     </span>
                   </div>
-                  <h5 className="assignment-name">Aldol Condensation & Retrosynthesis Mechanism</h5>
+                  <h5 className="assignment-name">Enzyme Lab Report &amp; Data Table</h5>
                   <p className="assignment-snippet">
-                    Provide the curved-arrow stereochemical mechanism for compound C4 and outline the purification protocol.
+                    Summarize how temperature affected reaction speed in Lab 4 and explain the control group results.
                   </p>
                   <div className="assignment-footer">
                     <div className="attached-files">
                       <FileText size={12} />
-                      <span>Lab_Manual_Ex6.docx (Attached)</span>
+                      <span>Lab_04_Guide.pdf</span>
                     </div>
-                    <span className="queued-tag">Queued for Solver</span>
+                    <span className="queued-tag">Ready to solve</span>
                   </div>
                 </div>
 
-                {/* Task 3 */}
                 <div className="assignment-card dimmed">
                   <div className="assignment-meta">
-                    <span className="course-code">CS 106</span>
+                    <span className="course-code">CS 101</span>
                     <span className="urgency-badge normal">Due Friday</span>
                   </div>
-                  <h5 className="assignment-name">Dynamic Programming: 0/1 Knapsack Optimization</h5>
+                  <h5 className="assignment-name">Python Lists &amp; Loops Worksheet</h5>
                   <p className="assignment-snippet">
-                    Write Python recursive solution with memoization table and asymptotic space-time proof.
+                    Write 3 short functions to filter student grades and explain the time complexity of each loop.
                   </p>
                 </div>
               </div>
@@ -169,115 +162,89 @@ export const CourseworkShowcase: React.FC = () => {
           {activeTab === 'studio' && (
             <motion.div
               key="studio"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
               className="showcase-panel studio-panel"
             >
-              <div className="studio-top-info">
-                <div className="studio-task-header">
-                  <span className="course-badge">ECON 201</span>
-                  <span className="studio-assignment-ref">Problem Set 4</span>
-                </div>
-                <div className="studio-meta-right">
-                  <span className="model-chip">
-                    <Sparkles size={12} /> Claude 3.5 Sonnet · Stepwise
-                  </span>
-                </div>
-              </div>
+              <div className="instant-flow-grid">
+                {/* LEFT: INPUT (What You Have) */}
+                <div className="flow-card input-card">
+                  <div className="flow-card-eyebrow">
+                    <span className="step-label">1. YOUR ASSIGNMENT</span>
+                    <span className="course-code">PSYCH 101</span>
+                  </div>
 
-              <div className="studio-workspace">
-                {/* Document Canvas Content */}
-                <div className="workspace-document">
-                  <div className="doc-header">
-                    <h3 className="doc-title">Mathematical Equilibrium & Shift Analysis</h3>
-                    <p className="doc-subtitle">
-                      Grounded in Professor Chen’s Lecture 8 (Slide 14) &amp; Mankiw Ch. 12
+                  <h3 className="flow-title">Sleep &amp; Memory Response Paper</h3>
+                  <p className="flow-prompt">
+                    “Explain how slow-wave sleep helps form long-term memories. Cite at least two findings from Lecture 6 and Textbook Ch. 4.”
+                  </p>
+
+                  <div className="flow-files-block">
+                    <span className="files-heading">Class files Lucid read for you</span>
+                    <ul className="flow-file-list">
+                      <li>
+                        <Check size={13} />
+                        <span>Assignment_Prompt.pdf</span>
+                      </li>
+                      <li>
+                        <Check size={13} />
+                        <span>Lecture_06_Slides.pdf</span>
+                      </li>
+                      <li>
+                        <Check size={13} />
+                        <span>Grading_Rubric.pdf</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="flow-input-footer">
+                    <Clock size={13} />
+                    <span>Pulled from Canvas · Due Tonight</span>
+                  </div>
+                </div>
+
+                {/* CENTER: VISUAL BRIDGE */}
+                <div className="flow-bridge" aria-hidden="true">
+                  <div className="bridge-pill">
+                    <ArrowRight size={16} />
+                    <span>14 sec</span>
+                  </div>
+                </div>
+
+                {/* RIGHT: OUTPUT (What Lucid Writes) */}
+                <div className="flow-card output-card">
+                  <div className="flow-card-eyebrow">
+                    <span className="step-label accent">2. READY TO SUBMIT</span>
+                    <span className="output-grade-pill" onClick={() => handleTabClick('rubric')}>
+                      <CheckCircle2 size={13} />
+                      <span>100 / 100 Rubric Match</span>
+                    </span>
+                  </div>
+
+                  <div className="output-paper">
+                    <h4 className="output-paper-title">How Deep Sleep Locks In Memory</h4>
+                    <p className="output-paper-p">
+                      During slow-wave sleep, the brain replays new information from the hippocampus to the neocortex for long-term storage (<span className="inline-cite">Lecture 6, Slide 11</span>).
+                    </p>
+                    <p className="output-paper-p">
+                      Research confirms that students deprived of deep sleep retain 40% fewer facts the next day (<span className="inline-cite">Textbook Ch. 4, p. 118</span>), showing that rest is essential for memory consolidation.
                     </p>
                   </div>
 
-                  <div className="doc-body-content">
-                    <div className="solution-section">
-                      <h4 className="section-heading">1. General Equilibrium Formulation</h4>
-                      <p className="doc-p">
-                        From the goods market equilibrium condition, aggregate demand must equal total output <span className="math-inline">Y</span>:
-                      </p>
-                      <div className="math-block">
-                        <span className="math-expr">Y = C(Y − T) + I(r) + G</span>
-                        <span className="math-note">MPC = 0.75</span>
-                      </div>
-                      <p className="doc-p">
-                        Substituting the consumption function into aggregate output yields the fiscal multiplier:
-                      </p>
-                      <div className="math-block">
-                        <span className="math-expr">ΔY / ΔG = 1 / (1 − MPC) = 1 / (1 − 0.75) = 4.0</span>
-                      </div>
+                  <div className="flow-output-footer">
+                    <div className="quick-checks">
+                      <span><Check size={12} /> Prompt answered</span>
+                      <span><Check size={12} /> Class slides cited</span>
+                      <span><Check size={12} /> 512 words</span>
                     </div>
-
-                    <div className="solution-section">
-                      <h4 className="section-heading">2. Comparative Statics &amp; Monetary Response</h4>
-                      <p className="doc-p">
-                        When the central bank expands the real money supply by <span className="math-inline">Δ(M/P) = +$50B</span>, the LM curve shifts downward and to the right. Per Lecture 8 (Slide 14), the interest rate falls from <span className="math-inline">r₀ = 4.5%</span> to <span className="math-inline">r₁ = 3.2%</span>, stimulating investment demand by <span className="math-inline">+$80B</span>.
-                      </p>
-                    </div>
-
-                    <div className="solution-callout">
-                      <Check size={13} className="callout-icon" />
-                      <span>Criterion #3 verified — parameters, signs, and units match course rubric.</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Studio Live Sidebar */}
-                <div className="studio-sidebar-insights">
-                  <div className="insight-card">
-                    <div className="insight-title">
-                      <GraduationCap size={14} />
-                      <span>Course Readings Grounded</span>
-                    </div>
-                    <ul className="reading-list">
-                      <li>
-                        <span className="reading-name">Syllabus Sec. 4.2</span>
-                        <span className="reading-tag">Rubric</span>
-                      </li>
-                      <li>
-                        <span className="reading-name">Lecture 08: IS–LM</span>
-                        <span className="reading-tag">32 pp</span>
-                      </li>
-                      <li>
-                        <span className="reading-name">Mankiw Ch. 12</span>
-                        <span className="reading-tag">Text</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="insight-card highlight">
-                    <div className="insight-title">
-                      <ShieldCheck size={14} />
-                      <span>Academic Quality Audit</span>
-                    </div>
-                    <div className="audit-metrics">
-                      <div className="metric-item">
-                        <span className="metric-num">100%</span>
-                        <span className="metric-lbl">Original</span>
-                      </div>
-                      <div className="metric-item">
-                        <span className="metric-num">100%</span>
-                        <span className="metric-lbl">Rubric Match</span>
-                      </div>
-                    </div>
-                    <ul className="audit-mini-checks">
-                      <li><Check size={12} /> Full IS–LM derivation</li>
-                      <li><Check size={12} /> Slide 14 &amp; Ch. 12 cited</li>
-                      <li><Check size={12} /> Units &amp; signs verified</li>
-                    </ul>
                     <button
                       type="button"
-                      className="audit-inspect-btn"
+                      className="view-rubric-link"
                       onClick={() => handleTabClick('rubric')}
                     >
-                      View Rubric Breakdown →
+                      See Grade Check →
                     </button>
                   </div>
                 </div>
@@ -288,20 +255,20 @@ export const CourseworkShowcase: React.FC = () => {
           {activeTab === 'rubric' && (
             <motion.div
               key="rubric"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
               className="showcase-panel rubric-panel"
             >
               <div className="panel-subhead">
                 <div>
-                  <h4 className="panel-title">Automated Rubric Audit</h4>
-                  <p className="panel-desc">Scans assignment output against your syllabus criteria before you submit</p>
+                  <h4 className="panel-title">Checked Against Your Professor’s Rubric</h4>
+                  <p className="panel-desc">Every requirement verified before you turn it in</p>
                 </div>
                 <div className="rubric-score-badge">
                   <span className="score-num">100 / 100</span>
-                  <span className="score-label">Full Grade Guaranteed</span>
+                  <span className="score-label">Ready to Submit</span>
                 </div>
               </div>
 
@@ -310,12 +277,25 @@ export const CourseworkShowcase: React.FC = () => {
                   <div className="rubric-item-header">
                     <div className="item-title-row">
                       <CheckCircle2 size={16} className="check-icon" />
-                      <span className="criteria-name">Criterion 1: Theoretical Foundation & Math Derivation</span>
+                      <span className="criteria-name">Explains slow-wave sleep &amp; memory consolidation</span>
+                    </div>
+                    <span className="criteria-points">40 / 40 pts</span>
+                  </div>
+                  <p className="criteria-feedback">
+                    Clearly covers hippocampal replay to the neocortex and why deep sleep stabilizes new memories.
+                  </p>
+                </div>
+
+                <div className="rubric-item verified">
+                  <div className="rubric-item-header">
+                    <div className="item-title-row">
+                      <CheckCircle2 size={16} className="check-icon" />
+                      <span className="criteria-name">Cites Lecture 6 &amp; Textbook Ch. 4</span>
                     </div>
                     <span className="criteria-points">30 / 30 pts</span>
                   </div>
                   <p className="criteria-feedback">
-                    Full mathematical proof of the IS-LM goods market equilibrium is explicitly derived. Equations are properly numbered and formatted.
+                    Includes exact page and slide references matching your uploaded course materials.
                   </p>
                 </div>
 
@@ -323,50 +303,21 @@ export const CourseworkShowcase: React.FC = () => {
                   <div className="rubric-item-header">
                     <div className="item-title-row">
                       <CheckCircle2 size={16} className="check-icon" />
-                      <span className="criteria-name">Criterion 2: Course Material Citations</span>
+                      <span className="criteria-name">Meets 500-word length &amp; academic tone</span>
                     </div>
-                    <span className="criteria-points">25 / 25 pts</span>
+                    <span className="criteria-points">30 / 30 pts</span>
                   </div>
                   <p className="criteria-feedback">
-                    Accurately cites Professor Chen’s Lecture 8 slides (Slide 14 & 18) and Chapter 12 textbook examples with page references.
-                  </p>
-                </div>
-
-                <div className="rubric-item verified">
-                  <div className="rubric-item-header">
-                    <div className="item-title-row">
-                      <CheckCircle2 size={16} className="check-icon" />
-                      <span className="criteria-name">Criterion 3: Comparative Static Analysis</span>
-                    </div>
-                    <span className="criteria-points">25 / 25 pts</span>
-                  </div>
-                  <p className="criteria-feedback">
-                    Correctly evaluates the magnitude of the monetary shock on investment demand ($80B shift) with all units included.
-                  </p>
-                </div>
-
-                <div className="rubric-item verified">
-                  <div className="rubric-item-header">
-                    <div className="item-title-row">
-                      <CheckCircle2 size={16} className="check-icon" />
-                      <span className="criteria-name">Criterion 4: Academic Writing & Format</span>
-                    </div>
-                    <span className="criteria-points">20 / 20 pts</span>
-                  </div>
-                  <p className="criteria-feedback">
-                    Clear section headers, professional tone, zero spelling or syntax errors, conforming to standard departmental guidelines.
+                    512 words total, cleanly structured with zero spelling, grammar, or citation formatting errors.
                   </p>
                 </div>
               </div>
 
               <div className="rubric-export-bar">
-                <span className="export-hint">Assignment is verified and ready for turn-in.</span>
-                <a
-                  href="https://app.lucid-ai.co"
-                  className="export-btn"
-                >
+                <span className="export-hint">Verified and ready to export to Word, PDF, or Canvas.</span>
+                <a href="https://app.lucid-ai.co" className="export-btn">
+                  <span>Try on Your Assignment</span>
                   <ArrowRight size={14} />
-                  <span>Open in Lucid & Turn In</span>
                 </a>
               </div>
             </motion.div>
@@ -376,4 +327,3 @@ export const CourseworkShowcase: React.FC = () => {
     </div>
   );
 };
-
