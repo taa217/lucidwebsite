@@ -5,7 +5,6 @@ import {
   ArrowRight,
   Clock,
   CheckCircle2,
-  AlertTriangle,
   Layers,
   ShieldCheck,
   BookOpen,
@@ -14,7 +13,6 @@ import {
   ChevronDown,
   Check,
   X,
-  GraduationCap,
   Star,
   Lock,
   Cpu
