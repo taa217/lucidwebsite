@@ -115,13 +115,22 @@ body {
   background: transparent;
 }
 
-.logo-container {
+.logo-container,
+.logo-container:visited {
   display: flex;
   align-items: center;
   gap: 12px;
   font-weight: 700;
   font-size: 20px;
   position: relative;
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+.logo-text {
+  color: var(--text-main);
+  letter-spacing: -0.025em;
+  line-height: 1;
 }
 
 .logo-container img {
