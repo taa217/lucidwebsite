@@ -325,12 +325,12 @@ export const Home = () => {
       <section className="storybrand-section features-section" id="features">
         <div className="section-container">
           <h2 className="section-main-heading">
-            Engineered to handle real syllabi, <br />
-            not just generic chat prompts.
+            Built for real homework, <br />
+            not generic chat.
           </h2>
           <p className="section-description">
-            Generic chatbots hallucinate and miss crucial grading rules. Lucid was built from the
-            ground up specifically for university and college assignments.
+            Regular AI guesses and misses your teacher’s grading rules. Lucid follows your actual
+            class notes and assignment instructions.
           </p>
 
           <div className="bento-grid-modern">
@@ -340,17 +340,16 @@ export const Home = () => {
                 <span className="bento-icon-pill">
                   <BookOpen size={18} />
                 </span>
-                <span className="bento-subtag">Direct LMS Integration</span>
               </div>
-              <h3>Automatic Sync with Canvas & Google Classroom</h3>
+              <h3>Connects to Canvas & Google Classroom</h3>
               <p>
-                Never copy-paste an assignment prompt again. Lucid syncs your full course schedule,
-                attached lecture slides, syllabus PDFs, and discussion threads in real-time.
+                No more copying and pasting prompts. Sync your classes once to pull in due dates,
+                slides, and assignment files automatically.
               </p>
               <div className="lms-logos-row">
-                <span className="lms-chip">Canvas LMS</span>
+                <span className="lms-chip">Canvas</span>
                 <span className="lms-chip">Google Classroom</span>
-                <span className="lms-chip">PDF & Doc Upload</span>
+                <span className="lms-chip">PDF & Word</span>
               </div>
             </div>
 
@@ -360,12 +359,11 @@ export const Home = () => {
                 <span className="bento-icon-pill">
                   <ShieldCheck size={18} />
                 </span>
-                <span className="bento-subtag">Grade Insurance</span>
               </div>
-              <h3>Automated Rubric Audit</h3>
+              <h3>Checks every grading rule</h3>
               <p>
-                Scans generated solutions against your syllabus rubric to verify all equations,
-                sources, and criteria are satisfied before submission.
+                Reviews your draft against your teacher’s rubric so you don’t lose points on
+                missing steps or citations.
               </p>
             </div>
 
@@ -375,11 +373,11 @@ export const Home = () => {
                 <span className="bento-icon-pill">
                   <Layers size={18} />
                 </span>
-                <span className="bento-subtag">Custom Depth</span>
               </div>
-              <h3>4 Solver Strategies</h3>
+              <h3>Pick your level of detail</h3>
               <p>
-                Toggle between <strong>Stepwise</strong> (full work shown), <strong>Rigorous</strong> (deep academic proofs), <strong>Concise</strong>, or <strong>Collaborative</strong> modes.
+                Switch between quick answers, full step-by-step work, deep explanations, or
+                study-partner mode.
               </p>
             </div>
 
@@ -389,12 +387,11 @@ export const Home = () => {
                 <span className="bento-icon-pill">
                   <FileText size={18} />
                 </span>
-                <span className="bento-subtag">Zero Hallucinations</span>
               </div>
-              <h3>Grounded in Your Course Materials</h3>
+              <h3>Uses your actual class notes</h3>
               <p>
-                Lucid reads your professor's specific lecture slides, chapter readings, and lab
-                manuals—citing the exact formulas and notation taught in your class.
+                Reads your professor’s slides, readings, and lab guides so solutions match the exact
+                formulas taught in your course.
               </p>
             </div>
 
@@ -404,29 +401,25 @@ export const Home = () => {
                 <span className="bento-icon-pill">
                   <Sparkles size={18} />
                 </span>
-                <span className="bento-subtag">Frontier AI</span>
               </div>
-              <h3>Powered by Claude 3.5 & GPT-4o</h3>
+              <h3>Powered by Gemini 4, GPT-6.2 & Claude</h3>
               <p>
-                Select the premier model for each subject: Claude 3.5 Sonnet for writing and analysis,
-                GPT-4o for math, and DeepSeek for advanced code.
+                Use the right AI for every class—<strong>Gemini 4 Carbon</strong> for deep
+                research, <strong>GPT-6.2 Astra</strong> for math and coding, and{' '}
+                <strong>Claude Sonnet 5.5 / Fable 5.2</strong> for clear writing.
               </p>
             </div>
+          </div>
 
-            {/* Feature 6: Privacy */}
-            <div className="bento-cell">
-              <div className="bento-cell-header">
-                <span className="bento-icon-pill">
-                  <Lock size={18} />
-                </span>
-                <span className="bento-subtag">Total Security</span>
-              </div>
-              <h3>100% Confidential & Plagiarism Safe</h3>
-              <p>
-                Your coursework is private, encrypted, and never used to train public AI models.
-                Original solutions constructed from first principles.
-              </p>
-            </div>
+          {/* Full-width Privacy & Originality Bar */}
+          <div className="bento-trust-bar">
+            <span className="bento-icon-pill">
+              <Lock size={17} />
+            </span>
+            <p>
+              <strong>Private and never shared:</strong> Your files stay encrypted, are never used
+              to train public AI, and every solution is written fresh from scratch.
+            </p>
           </div>
         </div>
       </section>
